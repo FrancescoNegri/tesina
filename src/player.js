@@ -41,6 +41,7 @@ Player.prototype.update = function() {
     }*/
     else {
         this.animations.play('idle');
+        this.scale.setTo(1 * scaleIndex, 1 * scaleIndex); 
         this.body.velocity.x = 0;
     }
 };
