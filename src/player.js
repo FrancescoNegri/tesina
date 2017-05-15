@@ -14,7 +14,10 @@ Player = function (game, x, y) {
     
     this.game.physics.enable(this, Phaser.Physics.ARCADE);
     this.body.collideWorldBounds = true;
-    this.body.gravity.y = 400;
+    this.body.gravity.y = 700;
+    this.body.setSize(26, 28);
+
+    this.game.camera.follow(this);
 
     game.add.existing(this);
 };
@@ -23,15 +26,24 @@ Player.prototype = Object.create(Phaser.Sprite.prototype);
 Player.prototype.constructor = Player;
 
 Player.prototype.update = function() {
-    if (this.cursors.left.isDown && this.body.velocity.y == 0) {
+    if (this.cursors.left.isDown /*&& this.body.velocity.y == 0*/) {
         this.scale.setTo(-1 * scaleIndex, 1 * scaleIndex); 
         this.body.velocity.x = -runSpeed;
         this.animations.play('walk');
     }
-    else if (this.cursors.right.isDown && this.body.velocity.y == 0) {
+    else if (this.cursors.right.isDown /*&& this.body.velocity.y == 0*/) {
         this.scale.setTo(1 * scaleIndex, 1 * scaleIndex); 
         this.body.velocity.x = runSpeed;
         this.animations.play('walk');
+    }
+    else {
+        this.animations.play('idle');
+        this.scale.setTo(1 * scaleIndex, 1 * scaleIndex); 
+        this.body.velocity.x = 0;
+    }
+
+    if (this.cursors.up.isDown && this.body.velocity.y == 0) {
+        this.body.velocity.y = -450;
     }
     /*else if (this.cursors.up.isDown) {
         this.y += -runSpeed;
@@ -39,10 +51,5 @@ Player.prototype.update = function() {
     else if (this.cursors.down.isDown) {
         this.y += runSpeed;
     }*/
-    else {
-        this.animations.play('idle');
-        this.scale.setTo(1 * scaleIndex, 1 * scaleIndex); 
-        this.body.velocity.x = 0;
-    }
 };
 

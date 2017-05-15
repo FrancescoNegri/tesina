@@ -13,6 +13,7 @@ var menuState = {
     start: function() {
         game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
         game.scale.startFullScreen(false);
+        game.canvas.style.cursor = 'none';
         game.state.start('play');
     }
 }
