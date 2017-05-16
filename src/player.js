@@ -1,4 +1,3 @@
-const scaleIndex = 4;
 const runSpeed = 150;
 
 Player = function (game, x, y) {
@@ -9,13 +8,13 @@ Player = function (game, x, y) {
     this.animations.add('idle', [0, 1], 3);
     this.animations.add('walk', [15, 16, 17], 12);
 
-    this.scale.setTo(scaleIndex, scaleIndex);
+    this.scale.setTo(scaleIndex - .5, scaleIndex - .5);
     this.anchor.setTo(0.5, 0);
     
     this.game.physics.enable(this, Phaser.Physics.ARCADE);
     this.body.collideWorldBounds = true;
     this.body.gravity.y = 700;
-    this.body.setSize(26, 28);
+    this.body.setSize(26, 30);
 
     this.game.camera.follow(this);
 

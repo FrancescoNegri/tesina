@@ -23,8 +23,52 @@
          "width":64,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "height":9,
+         "name":"Chests",
+         "objects":[
+                {
+                 "gid":51,
+                 "height":64,
+                 "id":5,
+                 "name":"t1",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":1011,
+                 "y":498
+                }, 
+                {
+                 "gid":51,
+                 "height":64,
+                 "id":7,
+                 "name":"t1",
+                 "properties":
+                    {
+                     "subject":"italiano"
+                    },
+                 "propertytypes":
+                    {
+                     "subject":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":577,
+                 "y":385
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "width":64,
+         "x":0,
+         "y":0
         }],
- "nextobjectid":1,
+ "nextobjectid":10,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":64,
