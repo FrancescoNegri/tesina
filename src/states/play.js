@@ -18,14 +18,14 @@ var playState = {
         this.chests.enableBody = true;
         this.map.createFromObjects('Chests', 51, 'chest', 0, true, false, this.chests, Chest);
 
-        //this.chest1 = new Chest(game, 600, 250);
-        this.player = new Player(game, 64, 0);
+        this.player = new Player(game, 64, 380);
 
     },
 
     render: function () {
-        game.debug.spriteInfo(this.player, 10, 10);
-        game.debug.bodyInfo(this.player, 10, 120);
+        game.debug.bodyInfo(this.player, 10, 10);
+        game.debug.body(this.player, 'rgba(255,0,0,0.5)');
+        this.chests.forEach((chest) => {game.debug.body(chest, 'rgba(255,0,0,0.5)')});
     },
 
     update: function () {
@@ -33,8 +33,12 @@ var playState = {
         //game.physics.arcade.collide(this.chest1, this.groundLayer, () => { this.chest1.body.moves = false; this.chest1.body.enabled = false;});
         //game.physics.arcade.collide(this.chest1, this.player, () => { /*game.state.start('test')*/ });
         game.physics.arcade.collide(this.chests, this.groundLayer);
-        game.physics.arcade.overlap(this.chests, this.player, (_player, _chest) => { _chest.openAction(this, _player); });
+        game.physics.arcade.overlap(this.chests, this.player, (_player, _chest) => {
+            _chest.openAction(this, _player);
+        });
         //game.physics.arcade.collide(this.chests, this.player);
+
+
 
     }
 }

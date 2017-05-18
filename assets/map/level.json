@@ -26,7 +26,7 @@
         }, 
         {
          "draworder":"topdown",
-         "height":9,
+         "height":0,
          "name":"Chests",
          "objects":[
                 {
@@ -60,15 +60,27 @@
                  "width":64,
                  "x":577,
                  "y":385
+                }, 
+                {
+                 "gid":51,
+                 "height":64,
+                 "id":10,
+                 "name":"t1",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":1729,
+                 "y":510
                 }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
-         "width":64,
+         "width":0,
          "x":0,
          "y":0
         }],
- "nextobjectid":10,
+ "nextobjectid":13,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":64,

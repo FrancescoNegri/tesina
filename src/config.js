@@ -1,1 +1,1 @@
-const scaleIndex = 4;
+const scaleIndex = 3.5;
