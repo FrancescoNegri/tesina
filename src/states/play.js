@@ -19,13 +19,14 @@ var playState = {
         this.map.createFromObjects('Chests', 51, 'chest', 0, true, false, this.chests, Chest);
 
         this.player = new Player(game, 64, 380);
-
     },
 
     render: function () {
-        game.debug.bodyInfo(this.player, 10, 10);
-        game.debug.body(this.player, 'rgba(255,0,0,0.5)');
-        this.chests.forEach((chest) => {game.debug.body(chest, 'rgba(255,0,0,0.5)')});
+        if (debugMode) {
+            game.debug.bodyInfo(this.player, 10, 10);
+            game.debug.body(this.player, 'rgba(255,0,0,0.5)');
+            this.chests.forEach((chest) => { game.debug.body(chest, 'rgba(255,0,0,0.5)') });
+        }
     },
 
     update: function () {
@@ -36,9 +37,6 @@ var playState = {
         game.physics.arcade.overlap(this.chests, this.player, (_player, _chest) => {
             _chest.openAction(this, _player);
         });
-        //game.physics.arcade.collide(this.chests, this.player);
-
-
 
     }
 }

@@ -57,7 +57,7 @@ Player.prototype.update = function () {
     }
 };
 
-Player.prototype.win = function (_target) {
+Player.prototype.win = function (_target, callback) {
     if (this.enable) {
         _target.enable = false;
         this.body.velocity.x = 0;
@@ -75,7 +75,7 @@ Player.prototype.win = function (_target) {
         winningTween.onComplete.addOnce(function () {
             //OPEN ANIMATION
 
-            _target.kill();
+            callback();
             this.enable = true;
         }, this);
 

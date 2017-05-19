@@ -10,6 +10,11 @@ Chest = function (game, x, y) {
     this.body.gravity.y = 700;
     this.immovable = true;
 
+    this.animations.add('closed' [0]);
+    this.animations.add('opened', [1]);
+
+    this.closed = true;
+
     game.add.existing(this);
 };
 
@@ -17,12 +22,15 @@ Chest.prototype = Object.create(Phaser.Sprite.prototype);
 Chest.prototype.constructor = Chest;
 
 Chest.prototype.update = function () {
-
+    if (this.closed) this.animations.play('closed')
+    else this.animations.play('opened');
 };
 
 Chest.prototype.openAction = function (_this, agent) {
     if (this.enable) {
         //game.state.start('test');
-        agent.win(this);
+        agent.win(this, () => {
+            this.closed = false;
+        });
     }
 }
