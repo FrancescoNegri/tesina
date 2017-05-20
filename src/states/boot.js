@@ -6,6 +6,8 @@ var bootState = {
         game.scale.pageAlignVeritcally = true;
         game.scale.refresh();
 
+        game.input.gamepad.start();
+
         game.state.start('load');
     }
 }

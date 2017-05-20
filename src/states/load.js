@@ -4,6 +4,7 @@ var loadState = {
         
         game.load.spritesheet('player', 'assets/panda.png', 32, 32);
         game.load.spritesheet('chest', 'assets/chest.png', 32, 32);
+        game.load.spritesheet('controller-indicator', 'assets/controller-indicator.png', 16, 16);
 
         game.load.tilemap('tilemap', 'assets/map/level.json', null, Phaser.Tilemap.TILED_JSON);
         game.load.image('tiles', 'assets/tileset.png');

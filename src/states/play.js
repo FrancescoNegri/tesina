@@ -11,7 +11,6 @@ var playState = {
         this.map.setCollisionBetween(1, 64, true, 'GroundLayer');
         game.physics.arcade.enable(this.groundLayer);
         this.groundLayer.resizeWorld();
-
         //SPRITES
 
         this.chests = game.add.group();
@@ -23,7 +22,7 @@ var playState = {
 
     render: function () {
         if (debugMode) {
-            game.debug.bodyInfo(this.player, 10, 10);
+            game.debug.bodyInfo(this.player, 64, 10);
             game.debug.body(this.player, 'rgba(255,0,0,0.5)');
             this.chests.forEach((chest) => { game.debug.body(chest, 'rgba(255,0,0,0.5)') });
         }
