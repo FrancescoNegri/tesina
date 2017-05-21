@@ -17,7 +17,7 @@ var playState = {
         this.chests.enableBody = true;
         this.map.createFromObjects('Chests', 51, 'chest', 0, true, false, this.chests, Chest);
 
-        this.player = new Player(game, 64, 380);
+        this.player = new Player(game, 64, 300);
     },
 
     render: function () {

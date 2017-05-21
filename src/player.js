@@ -2,24 +2,28 @@ Player = function (game, x, y) {
     Phaser.Sprite.call(this, game, x, y, 'player');
     this.enable = true;
     this.runSpeed = 150;
-    this.cursors = game.input.keyboard.createCursorKeys();;
+    this.scalingFactor = 4;
+    this.cursors = game.input.keyboard.createCursorKeys();
 
     this.gamepad = { enable: false };
     this.initGamepad();
 
-    this.animations.add('idle', [0, 1], 3);
-    this.animations.add('walk', [15, 16, 17], 12);
+    //this.animations.add('idle', [0, 1], 3);
+    //this.animations.add('walk', [15, 16, 17], 12);
+    this.animations.add('idle', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], 12);
+    this.animations.add('walk', [20, 21, 22, 23, 24, 25, 26, 27], 12);
 
-    this.scale.setTo(scaleIndex, scaleIndex);
+    this.scale.setTo(this.scalingFactor, this.scalingFactor);
     this.anchor.setTo(0.5, 0);
 
     this.game.physics.enable(this, Phaser.Physics.ARCADE);
     this.body.collideWorldBounds = true;
     this.body.gravity.y = 700;
 
-    var bodyDims = this.body.width / scaleIndex;
-    var bodyScalingFactor = { x: 0.6, y: 0.85 };
-    this.body.setSize(bodyDims * bodyScalingFactor.x, bodyDims * bodyScalingFactor.y, (bodyDims - (bodyDims * bodyScalingFactor.x)) / 2, (bodyDims - (bodyDims * bodyScalingFactor.y)) / 2);
+    var bodyDims = {width: this.body.width / this.scalingFactor, height: this.body.height / this.scalingFactor};
+    var bodyScalingFactor = { x: 0.5, y: 0.6 };
+    //this.body.setSize(bodyDims * bodyScalingFactor.x, bodyDims * bodyScalingFactor.y, (bodyDims - (bodyDims * bodyScalingFactor.x)) / 2, (bodyDims - (bodyDims * bodyScalingFactor.y)) / 2);
+    this.body.setSize(bodyDims.width * bodyScalingFactor.x, bodyDims.height * bodyScalingFactor.y, (bodyDims.width - (bodyDims.width * bodyScalingFactor.x)) / 2, bodyDims.height - (bodyDims.height * bodyScalingFactor.y));
 
     this.game.camera.follow(this);
 
@@ -54,8 +58,8 @@ Player.prototype.win = function (_target, callback) {
         var winningTween = this.game.add.tween(this);
         winningTween.to({ x: targetCenterX }, 8 * Math.abs(targetCenterX - this.x), null, true);
         winningTween.onUpdateCallback(function () {
-            if (targetCenterX > this.x) this.scale.setTo(1 * scaleIndex, 1 * scaleIndex)
-            else this.scale.setTo(-1 * scaleIndex, 1 * scaleIndex);
+            if (targetCenterX > this.x) this.scale.setTo(1 * this.scalingFactor, 1 * this.scalingFactor)
+            else this.scale.setTo(-1 * this.scalingFactor, 1 * this.scalingFactor);
             this.animations.play('walk')
         }, this);
         winningTween.onComplete.addOnce(function () {
@@ -160,24 +164,25 @@ Player.prototype.updateGamepad = function () {
 Player.prototype.actions = function (action) {
     switch (action) {
         case 'walk-left':
-            this.scale.setTo(-1 * scaleIndex, 1 * scaleIndex);
+            this.scale.setTo(-1 * this.scalingFactor, 1 * this.scalingFactor);
             this.body.velocity.x = -this.runSpeed;
             this.animations.play('walk');
             break;
 
         case 'walk-right':
-            this.scale.setTo(1 * scaleIndex, 1 * scaleIndex);
+            this.scale.setTo(1 * this.scalingFactor, 1 * this.scalingFactor);
             this.body.velocity.x = this.runSpeed;
             this.animations.play('walk');
             break;
 
         case 'jump':
             this.body.velocity.y = -450;
+            //this.animations.play('jump');
             break;
 
         case 'idle':
             this.animations.play('idle');
-            this.scale.setTo(1 * scaleIndex, 1 * scaleIndex);
+            //this.scale.setTo(1 * this.scalingFactor, 1 * this.scalingFactor);
             this.body.velocity.x = 0;
             break;
     }
