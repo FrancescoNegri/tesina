@@ -22,10 +22,10 @@ Player = function (game, x, y) {
     this.body.collideWorldBounds = true;
     this.body.gravity.y = 700;
 
-    var bodyDims = {width: this.body.width / this.scalingFactor, height: this.body.height / this.scalingFactor - 3};
+    var bodyDims = { width: this.body.width / this.scalingFactor, height: this.body.height / this.scalingFactor - 3 };
     var bodyScalingFactor = { x: 0.5, y: 0.6 };
     //this.body.setSize(bodyDims * bodyScalingFactor.x, bodyDims * bodyScalingFactor.y, (bodyDims - (bodyDims * bodyScalingFactor.x)) / 2, (bodyDims - (bodyDims * bodyScalingFactor.y)) / 2);
-    this.body.setSize(bodyDims.width * bodyScalingFactor.x, bodyDims.height * bodyScalingFactor.y, (bodyDims.width - (bodyDims.width * bodyScalingFactor.x)) / 2, bodyDims.height - (bodyDims.height * bodyScalingFactor.y) );
+    this.body.setSize(bodyDims.width * bodyScalingFactor.x, bodyDims.height * bodyScalingFactor.y, (bodyDims.width - (bodyDims.width * bodyScalingFactor.x)) / 2, bodyDims.height - (bodyDims.height * bodyScalingFactor.y));
 
     this.game.camera.follow(this);
 
@@ -112,17 +112,21 @@ Player.prototype.initGamepad = function () {
 }
 Player.prototype.checkForGamepad = function () {
     // Pad "connected or not" indicator
+    try {
+        if (game.input.gamepad.supported && game.input.gamepad.active && this.gamepad.pad1.connected) {
 
-    if (game.input.gamepad.supported && game.input.gamepad.active && this.gamepad.pad1.connected) {
+            this.gamepad.indicator.animations.frame = 0;
+            this.gamepad.enable = true;
+        }
 
-        this.gamepad.indicator.animations.frame = 0;
-        this.gamepad.enable = true;
+        else {
+
+            this.gamepad.indicator.animations.frame = 1;
+            this.gamepad.enable = false;
+        }
     }
-
-    else {
-
-        this.gamepad.indicator.animations.frame = 1;
-        this.gamepad.enable = false;
+    catch(error) {
+        console.log(error);
     }
 }
 Player.prototype.updateGamepad = function () {

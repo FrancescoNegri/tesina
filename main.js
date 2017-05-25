@@ -6,7 +6,7 @@ var game = new Phaser.Game(/*window.screen.height * (16/9) * scalingFactor*/ 102
 game.state.add('boot', bootState);
 game.state.add('load', loadState);
 game.state.add('menu', menuState);
-game.state.add('play', playState);
+game.state.add('level1', level1State);
 game.state.add('test', testState);
 
 game.state.start('boot');

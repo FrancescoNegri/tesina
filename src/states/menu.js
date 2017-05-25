@@ -13,6 +13,6 @@ var menuState = {
         game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
         if (fullScreen) game.scale.startFullScreen(false);
         game.canvas.style.cursor = 'none';
-        game.state.start('play');
+        game.state.start('level1');
     }
 }

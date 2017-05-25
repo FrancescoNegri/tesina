@@ -1,7 +1,5 @@
-var playState = {
+var level1State = {
     create: function () {
-        //game.stage.backgroundColor = '#5c94fc';
-
         //BACKGROUND
         this.bg = {};
         this.bg.layer1 = this.game.add.tileSprite(0, 0, 1024, 576, 'bg_layer1');
@@ -21,21 +19,23 @@ var playState = {
         this.bg.layer5.scale = {x: 3, y: 3};
 
         //MAP
-        this.map = this.game.add.tilemap('tilemap');
-        this.map.addTilesetImage('tileset', 'tiles')
+        this.map = this.game.add.tilemap('level1');
+        this.map.addTilesetImage('tileset', /*il file .png */'tileset');
 
         this.backgroundLayer = this.map.createLayer('BackgroundLayer');
         this.groundLayer = this.map.createLayer('GroundLayer');
         this.map.setCollisionBetween(1, 1000, true, 'GroundLayer');
         game.physics.arcade.enable(this.groundLayer);
         this.groundLayer.resizeWorld();
+        
         //SPRITES
-
         this.chests = game.add.group();
         this.chests.enableBody = true;
         this.map.createFromObjects('Chests', 51, 'chest', 0, true, false, this.chests, Chest);
 
         this.player = new Player(game, 64, 100);
+        
+        //alert('Level 1');
     },
 
     render: function () {
