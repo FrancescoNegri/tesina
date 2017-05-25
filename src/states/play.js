@@ -1,6 +1,24 @@
 var playState = {
     create: function () {
-        game.stage.backgroundColor = '#5c94fc';
+        //game.stage.backgroundColor = '#5c94fc';
+
+        //BACKGROUND
+        this.bg = {};
+        this.bg.layer1 = this.game.add.tileSprite(0, 0, 1024, 576, 'bg_layer1');
+        this.bg.layer1.fixedToCamera = true;
+        this.bg.layer1.scale = {x: 3, y: 3};
+        this.bg.layer2 = this.game.add.tileSprite(0, 0, 1024, 576, 'bg_layer2');
+        this.bg.layer2.fixedToCamera = true;
+        this.bg.layer2.scale = {x: 3, y: 3};
+        this.bg.layer3 = this.game.add.tileSprite(0, 0, 1024, 576, 'bg_layer3');
+        this.bg.layer3.fixedToCamera = true;
+        this.bg.layer3.scale = {x: 3, y: 3};
+        this.bg.layer4 = this.game.add.tileSprite(0, 0, 1024, 576, 'bg_layer4');
+        this.bg.layer4.fixedToCamera = true;
+        this.bg.layer4.scale = {x: 3, y: 3};
+        this.bg.layer5 = this.game.add.tileSprite(0, 0, 1024, 576, 'bg_layer5');
+        this.bg.layer5.fixedToCamera = true;
+        this.bg.layer5.scale = {x: 3, y: 3};
 
         //MAP
         this.map = this.game.add.tilemap('tilemap');
@@ -8,7 +26,7 @@ var playState = {
 
         this.backgroundLayer = this.map.createLayer('BackgroundLayer');
         this.groundLayer = this.map.createLayer('GroundLayer');
-        this.map.setCollisionBetween(1, 64, true, 'GroundLayer');
+        this.map.setCollisionBetween(1, 1000, true, 'GroundLayer');
         game.physics.arcade.enable(this.groundLayer);
         this.groundLayer.resizeWorld();
         //SPRITES
@@ -17,7 +35,7 @@ var playState = {
         this.chests.enableBody = true;
         this.map.createFromObjects('Chests', 51, 'chest', 0, true, false, this.chests, Chest);
 
-        this.player = new Player(game, 64, 300);
+        this.player = new Player(game, 64, 100);
     },
 
     render: function () {
@@ -29,6 +47,11 @@ var playState = {
     },
 
     update: function () {
+        this.bg.layer2.tilePosition.x = this.bg.layer1.x * -0.05;
+        this.bg.layer3.tilePosition.x = this.bg.layer1.x * -0.1;
+        this.bg.layer4.tilePosition.x = this.bg.layer1.x * -0.15;
+        this.bg.layer5.tilePosition.x = this.bg.layer1.x * -0.2;
+
         game.physics.arcade.collide(this.player, this.groundLayer);
         //game.physics.arcade.collide(this.chest1, this.groundLayer, () => { this.chest1.body.moves = false; this.chest1.body.enabled = false;});
         //game.physics.arcade.collide(this.chest1, this.player, () => { /*game.state.start('test')*/ });

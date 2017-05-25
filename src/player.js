@@ -12,6 +12,8 @@ Player = function (game, x, y) {
     //this.animations.add('walk', [15, 16, 17], 12);
     this.animations.add('idle', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], 12);
     this.animations.add('walk', [20, 21, 22, 23, 24, 25, 26, 27], 12);
+    this.animations.add('jump-up', [12], 12);
+    this.animations.add('jump-down', [13], 12);
 
     this.scale.setTo(this.scalingFactor, this.scalingFactor);
     this.anchor.setTo(0.5, 0);
@@ -20,10 +22,10 @@ Player = function (game, x, y) {
     this.body.collideWorldBounds = true;
     this.body.gravity.y = 700;
 
-    var bodyDims = {width: this.body.width / this.scalingFactor, height: this.body.height / this.scalingFactor};
+    var bodyDims = {width: this.body.width / this.scalingFactor, height: this.body.height / this.scalingFactor - 3};
     var bodyScalingFactor = { x: 0.5, y: 0.6 };
     //this.body.setSize(bodyDims * bodyScalingFactor.x, bodyDims * bodyScalingFactor.y, (bodyDims - (bodyDims * bodyScalingFactor.x)) / 2, (bodyDims - (bodyDims * bodyScalingFactor.y)) / 2);
-    this.body.setSize(bodyDims.width * bodyScalingFactor.x, bodyDims.height * bodyScalingFactor.y, (bodyDims.width - (bodyDims.width * bodyScalingFactor.x)) / 2, bodyDims.height - (bodyDims.height * bodyScalingFactor.y));
+    this.body.setSize(bodyDims.width * bodyScalingFactor.x, bodyDims.height * bodyScalingFactor.y, (bodyDims.width - (bodyDims.width * bodyScalingFactor.x)) / 2, bodyDims.height - (bodyDims.height * bodyScalingFactor.y) );
 
     this.game.camera.follow(this);
 
@@ -101,6 +103,7 @@ Player.prototype.initGamepad = function () {
     this.gamepad.indicator = game.add.sprite(10, 10, 'controller-indicator');
     this.gamepad.indicator.scale.x = this.gamepad.indicator.scale.y = 2;
     this.gamepad.indicator.animations.frame = 1;
+    this.gamepad.indicator.fixedToCamera = true;
 
     this.gamepad.pad1 = game.input.gamepad.pad1;
 
@@ -166,13 +169,17 @@ Player.prototype.actions = function (action) {
         case 'walk-left':
             this.scale.setTo(-1 * this.scalingFactor, 1 * this.scalingFactor);
             this.body.velocity.x = -this.runSpeed;
-            this.animations.play('walk');
+            if (this.body.velocity.y == 0) this.animations.play('walk')
+            else if (this.body.velocity.y > 0) this.animations.play('jump-down')
+            else this.animations.play('jump-up');
             break;
 
         case 'walk-right':
             this.scale.setTo(1 * this.scalingFactor, 1 * this.scalingFactor);
             this.body.velocity.x = this.runSpeed;
-            this.animations.play('walk');
+            if (this.body.velocity.y == 0) this.animations.play('walk')
+            else if (this.body.velocity.y > 0) this.animations.play('jump-down')
+            else this.animations.play('jump-up');
             break;
 
         case 'jump':
@@ -181,9 +188,11 @@ Player.prototype.actions = function (action) {
             break;
 
         case 'idle':
-            this.animations.play('idle');
             //this.scale.setTo(1 * this.scalingFactor, 1 * this.scalingFactor);
             this.body.velocity.x = 0;
+            if (this.body.velocity.y == 0) this.animations.play('idle')
+            else if (this.body.velocity.y > 0) this.animations.play('jump-down')
+            else this.animations.play('jump-up');
             break;
     }
 }
