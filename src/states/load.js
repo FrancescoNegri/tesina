@@ -14,6 +14,7 @@ var loadState = {
         game.load.image('bg_layer5', 'assets/bg/plx-5.png');
         //TILED MAP
         game.load.tilemap('level1', 'assets/map/level1.json', null, Phaser.Tilemap.TILED_JSON);
+        game.load.tilemap('level2', 'assets/map/level2.json', null, Phaser.Tilemap.TILED_JSON);
         game.load.image('tileset', 'assets/tileset.png');
     },
 

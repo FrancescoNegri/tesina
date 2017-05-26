@@ -87,7 +87,7 @@ Player.prototype.updateKeyboard = function () {
         this.actions('idle');
     }
 
-    if (this.cursors.up.isDown && this.body.velocity.y == 0) {
+    if (this.cursors.up.isDown && this.body.velocity.y == 0 && this.y > 0) {
         this.actions('jump');
     }
     /*else if (this.cursors.up.isDown) {

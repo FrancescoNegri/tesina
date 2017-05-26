@@ -1,10 +1,10 @@
-var level1State = {
+var level2State = {
     create: function () {
         //BACKGROUND
         initBackground(this);
 
         //MAP
-        this.map = this.game.add.tilemap('level1');
+        this.map = this.game.add.tilemap('level2');
         this.map.addTilesetImage('tileset', /*il file .png */'tileset');
 
         this.backgroundLayer = this.map.createLayer('BackgroundLayer');
@@ -16,7 +16,7 @@ var level1State = {
         //SPRITES
         this.chests = game.add.group();
         this.chests.enableBody = true;
-        this.map.createFromObjects('Chests', 498, 'chest', 0, true, false, this.chests, Chest);
+        this.map.createFromObjects('Chests', 51, 'chest', 0, true, false, this.chests, Chest);
 
         this.player = new Player(game, 64, 100);
     },

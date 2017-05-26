@@ -1,8 +1,8 @@
 Chest = function (game, x, y) {
     Phaser.Sprite.call(this, game, x, y, 'chest');
 
-    this.scale.setTo(scaleIndex, scaleIndex);
-
+    this.scalingFactor = 3;
+    this.scale.setTo(this.scalingFactor, this.scalingFactor);
     this.enable = true;
 
     this.game.physics.enable(this, Phaser.Physics.ARCADE);
@@ -10,8 +10,12 @@ Chest = function (game, x, y) {
     this.body.gravity.y = 700;
     this.immovable = true;
 
-    this.animations.add('closed' [0]);
+    this.animations.add('closed'[0]);
     this.animations.add('opened', [1]);
+
+    var bodyDims = { width: this.body.width / this.scalingFactor, height: this.body.height / this.scalingFactor - 4};
+    var bodyScalingFactor = { x: 3, y: 0.8 };
+    this.body.setSize(bodyDims.width * bodyScalingFactor.x, bodyDims.height * bodyScalingFactor.y, (bodyDims.width - (bodyDims.width * bodyScalingFactor.x)) / 2, bodyDims.height - (bodyDims.height * bodyScalingFactor.y));
 
     this.closed = true;
 
@@ -31,6 +35,7 @@ Chest.prototype.openAction = function (_this, agent) {
         //game.state.start('test');
         agent.win(this, () => {
             this.closed = false;
+            game.state.start('test');
         });
     }
 }
