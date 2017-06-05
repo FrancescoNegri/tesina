@@ -7,6 +7,6 @@ var testState = {
     },
 
     start: function() {
-        game.state.start('level2');
+        game.state.start('level1');
     }
 }

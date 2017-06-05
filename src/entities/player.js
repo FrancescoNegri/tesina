@@ -18,18 +18,13 @@ Player = function (game, x, y) {
     this.scale.setTo(this.scalingFactor, this.scalingFactor);
     this.anchor.setTo(0.5, 0);
 
-    this.game.physics.enable(this, Phaser.Physics.ARCADE);
-    this.body.collideWorldBounds = true;
-    this.body.gravity.y = 700;
-
-    var bodyDims = { width: this.body.width / this.scalingFactor, height: this.body.height / this.scalingFactor - 3 };
-    var bodyScalingFactor = { x: 0.4, y: 0.6 };
-    //this.body.setSize(bodyDims * bodyScalingFactor.x, bodyDims * bodyScalingFactor.y, (bodyDims - (bodyDims * bodyScalingFactor.x)) / 2, (bodyDims - (bodyDims * bodyScalingFactor.y)) / 2);
-    this.body.setSize(bodyDims.width * bodyScalingFactor.x, bodyDims.height * bodyScalingFactor.y, (bodyDims.width - (bodyDims.width * bodyScalingFactor.x)) / 2, bodyDims.height - (bodyDims.height * bodyScalingFactor.y));
-
-    this.game.camera.follow(this);
+    this.liana = this.game.add.sprite(this.x * 2, -240, 'liana');
+    this.liana.scale.setTo(this.scalingFactor, this.scalingFactor);
 
     game.add.existing(this);
+
+    if (playCutscene) this.enterCutscene()
+    else this.initPlayerBody();
 };
 
 Player.prototype = Object.create(Phaser.Sprite.prototype);
@@ -45,6 +40,9 @@ Player.prototype.update = function () {
         if (this.gamepad.enable) {
             this.updateGamepad();
         }
+    }
+    else {
+        this.gamepad.indicator.visible = false;
     }
 };
 
@@ -111,6 +109,7 @@ Player.prototype.initGamepad = function () {
     //this.player.gamepad.pad = this.pad1;
 }
 Player.prototype.checkForGamepad = function () {
+    if (!this.gamepad.indicator.visible) this.gamepad.indicator.visible = true;
     // Pad "connected or not" indicator
     try {
         if (game.input.gamepad.supported && game.input.gamepad.active && this.gamepad.pad1.connected) {
@@ -125,7 +124,7 @@ Player.prototype.checkForGamepad = function () {
             this.gamepad.enable = false;
         }
     }
-    catch(error) {
+    catch (error) {
         console.log(error);
     }
 }
@@ -199,5 +198,62 @@ Player.prototype.actions = function (action) {
             else this.animations.play('jump-up');
             break;
     }
+}
+
+Player.prototype.enterCutscene = function () {
+    playCutscene = false;
+
+    this.enable = false;
+    this.visible = false;
+    var introMusic = this.game.add.audio('intro');
+    introMusic.play();
+
+    var cameraTween = this.game.add.tween(this.game.camera);
+    cameraTween.from({ x: this.game.world.width }, 13 * 1000, Phaser.Easing.Circular.InOut, true);
+
+    game.time.events.add(Phaser.Timer.SECOND * 13, () => {
+        this.visible = true;
+        var lianaTween = this.game.add.tween(this.liana);
+        lianaTween.from({ x: -220, y: 100 }, 2800, null, true);
+        lianaTween.onComplete.addOnce(function () {
+            this.liana.kill();
+        }, this);
+        this.animations.add('enter', [14], 1);
+        var enterTween = this.game.add.tween(this);
+        enterTween.from({ x: -200, y: -200 }, 1750, null, true);
+        enterTween.onUpdateCallback(function () {
+            this.scale.setTo(1 * this.scalingFactor, 1 * this.scalingFactor);
+            this.animations.play('enter');
+        }, this);
+        enterTween.onComplete.addOnce(function () {
+            this.initPlayerBody();
+            
+            //PROVA TESTO
+            //this.enable = true;
+            /*let enterText = game.add.text(0, 0, 'Devo assolutamente trvoare il \n tesoro nasconsto in questa giungla!');
+            enterText.x = (this.x + this.width / 2) - enterText.width / 2;
+            enterText.y = this.y - 5;*/
+            let prova = new SpeechBox(game, this.player, 'Devo assolutamente trvoare il tesoro nasconsto in questa giungla!');
+            game.time.events.add(Phaser.Timer.SECOND * 5, () => {
+                //enterText.kill();
+            }, this)
+        }, this);
+
+        enterTween.start();
+    }, this);
+}
+
+Player.prototype.initPlayerBody = function () {
+    this.game.physics.enable(this, Phaser.Physics.ARCADE);
+    this.body.collideWorldBounds = true;
+    this.body.gravity.y = 700;
+
+    var bodyDims = { width: this.body.width / this.scalingFactor, height: this.body.height / this.scalingFactor - 3 };
+    var bodyScalingFactor = { x: 0.4, y: 0.6 };
+    //this.body.setSize(bodyDims * bodyScalingFactor.x, bodyDims * bodyScalingFactor.y, (bodyDims - (bodyDims * bodyScalingFactor.x)) / 2, (bodyDims - (bodyDims * bodyScalingFactor.y)) / 2);
+    this.body.setSize(bodyDims.width * bodyScalingFactor.x, bodyDims.height * bodyScalingFactor.y, (bodyDims.width - (bodyDims.width * bodyScalingFactor.x)) / 2, bodyDims.height - (bodyDims.height * bodyScalingFactor.y));
+
+    this.game.camera.follow(this);
+    this.enable = true;
 }
 
