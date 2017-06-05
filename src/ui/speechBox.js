@@ -1,4 +1,4 @@
-SpeechBox = function (game, speaker, text, callback) {
+SpeechBox = function (game, speaker, isBlocking, text, callback) {
     this.box = {}
     this.box.offset = 5;
     this.box.width = game.width - this.box.offset * 2;
@@ -13,11 +13,15 @@ SpeechBox = function (game, speaker, text, callback) {
 
     //Elaborare il test --> se > 75 caratteri trova spazi e manda a capo!
     if (text.length > 75) {
-        console.log('lungo');
-        text = [text.slice(0, 75), '\n', text.slice(75)].join('');
+        if (text.length < 75 * 3) {
+            console.log('lungo');
+            text = [text.slice(0, 75), '\n', text.slice(75)].join('');
+        }
+        else {
+            console.log('too long');
+            alert('DIALOGO TROPPO LUNGO! RISOLVERE!!!!! --> non posso gestirlo');
+        }
     }
-
-    //TODO: cambiare gemma indicatore con fumetto
 
     this.textOffest = 5;
     this.text = game.add.text(0 + this.textOffest, 0 + this.textOffest, text, { font: "24px Arial" });
@@ -25,13 +29,20 @@ SpeechBox = function (game, speaker, text, callback) {
     game.add.existing(this);
 
     this.speaker = speaker;
-    this.speakerIndicator = game.add.sprite(0, 200, 'speaker-indicator');
-    this.speakerIndicator.scale.setTo(1.5, 1.5);
+    this.speakerIndicator = game.add.sprite(0, 200, 'speech-bubble');
+    this.speakerIndicator.frame = 3;
+    this.speakerIndicator.scale.setTo(2, 2);
 
-    //Settare un tempo minimo e poi un tempo bonus dipendente dalla lunghezza --> eventualmente premere tasto per procedere
-    game.time.events.add(Phaser.Timer.SECOND * 5, () => {
-        this.killSpeechBox(callback);
-    }, this)
+    if (!isBlocking) {
+        //Settare un tempo minimo e poi un tempo bonus dipendente dalla lunghezza --> eventualmente premere tasto per procedere
+        game.time.events.add(Phaser.Timer.SECOND * 5, () => {
+            this.killSpeechBox(callback);
+        }, this)
+    }
+    else {
+        let blockingKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+        blockingKey.onDown.add(() => {this.killSpeechBox(callback)});
+    }
 };
 
 SpeechBox.prototype = Object.create(Phaser.Sprite.prototype);
@@ -39,6 +50,7 @@ SpeechBox.prototype.constructor = SpeechBox;
 
 SpeechBox.prototype.update = function () {
     this.speakerIndicator.x = this.speaker.x - this.speakerIndicator.width / 2;
+    this.speakerIndicator.y = this.speaker.y - this.speakerIndicator.height / 4;
     /*this.anchor.setTo(0.12, 0.12);
     this.animations.play('right');
     this.x = this.speaker.x;

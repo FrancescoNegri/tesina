@@ -19,13 +19,14 @@ var level1State = {
         this.map.createFromObjects('Chests', 498, 'chest', 0, true, false, this.chests, Chest);
         
         this.entities = game.add.group();
-        this.fengMengbo = new FengMengbo(game, 700, 100);
+        this.fengMengbo = new FengMengbo(game, 650, 100);
         this.entities.add(this.fengMengbo);
         this.player = new Player(game, 290, 100);
         this.entities.add(this.player);
         
-        let prova = new SpeechBox(game, this.player, '123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890', () => {
-            let testo2 = new SpeechBox(game, this.fengMengbo, 'Ciao, presto diventerò cinese! \nSetti ci sta lavorando...', () => {});
+        this.player.enable = false;
+        let prova = new SpeechBox(game, this.player, true, '123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890 (BLOCCANTE)', () => {
+            let testo2 = new SpeechBox(game, this.fengMengbo, false, 'Ciao, presto diventerò cinese! \nSetti ci sta lavorando... (NON BLOCCANTE)', () => {this.player.enable = true});
         });
         //var image = new Phaser.NinePatchImage(game, game.width/2, game.height/2, 'blue_button02');
         //console.log(prova);
