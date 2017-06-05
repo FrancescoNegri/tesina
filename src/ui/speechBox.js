@@ -1,4 +1,4 @@
-SpeechBox = function (game, speaker, text) {
+SpeechBox = function (game, speaker, text, callback) {
     this.box = {}
     this.box.offset = 5;
     this.box.width = game.width - this.box.offset * 2;
@@ -11,33 +11,34 @@ SpeechBox = function (game, speaker, text) {
     this.image.targetHeight = this.box.height;
     this.image.fixedToCamera = true;
 
+    //Elaborare il test --> se > 75 caratteri trova spazi e manda a capo!
+    if (text.length > 75) {
+        console.log('lungo');
+        text = [text.slice(0, 75), '\n', text.slice(75)].join('');
+    }
+
+    //TODO: cambiare gemma indicatore con fumetto
+
     this.textOffest = 5;
     this.text = game.add.text(0 + this.textOffest, 0 + this.textOffest, text, { font: "24px Arial" });
     this.image.addChild(this.text);
     game.add.existing(this);
-    /*this.speaker = speaker;
-    this.completeBubble = game.add.group();
 
-    //TODO: centrare in modo corretto il fumetto sopra allo speaker e che flippi direzione come lo speaker
-    //TODO: decidere dimensione carattere e lunghezza massima dopo la quale andare a capo --> deidere anche numero di righe massimo per fumetto prima di splittare il testo
-    this.maxWidth = 20;
-    this.maxHeight = 4;
+    this.speaker = speaker;
+    this.speakerIndicator = game.add.sprite(0, 200, 'speaker-indicator');
+    this.speakerIndicator.scale.setTo(1.5, 1.5);
 
-    this.animations.add('left', [0]);
-    this.animations.add('right', [1]);
-    this.scalingFactor = 6;
-    this.scale.setTo(this.scalingFactor + 10, this.scalingFactor);
-    game.add.existing(this);
-    this.text = game.add.text(0, 0, text, { font: "24px Arial" });
-
-    this.completeBubble.add(this);
-    this.completeBubble.add(this.text);*/
+    //Settare un tempo minimo e poi un tempo bonus dipendente dalla lunghezza --> eventualmente premere tasto per procedere
+    game.time.events.add(Phaser.Timer.SECOND * 5, () => {
+        this.killSpeechBox(callback);
+    }, this)
 };
 
 SpeechBox.prototype = Object.create(Phaser.Sprite.prototype);
 SpeechBox.prototype.constructor = SpeechBox;
 
 SpeechBox.prototype.update = function () {
+    this.speakerIndicator.x = this.speaker.x - this.speakerIndicator.width / 2;
     /*this.anchor.setTo(0.12, 0.12);
     this.animations.play('right');
     this.x = this.speaker.x;
@@ -54,3 +55,9 @@ SpeechBox.prototype.update = function () {
         this.scale.setTo(-this.scalingFactor, this.scalingFactor);
     }*/
 };
+
+SpeechBox.prototype.killSpeechBox = function (callback) {
+    this.image.kill();
+    this.speakerIndicator.kill();
+    callback();
+}

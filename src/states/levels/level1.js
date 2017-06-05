@@ -24,6 +24,9 @@ var level1State = {
         this.player = new Player(game, 290, 100);
         this.entities.add(this.player);
         
+        let prova = new SpeechBox(game, this.player, '123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890', () => {
+            let testo2 = new SpeechBox(game, this.fengMengbo, 'Ciao, presto diventerò cinese! \nSetti ci sta lavorando...', () => {});
+        });
         //var image = new Phaser.NinePatchImage(game, game.width/2, game.height/2, 'blue_button02');
         //console.log(prova);
         //this.a = new SpeechBubble(game, this.player, 'Ciao');

@@ -233,7 +233,8 @@ Player.prototype.enterCutscene = function () {
             /*let enterText = game.add.text(0, 0, 'Devo assolutamente trvoare il \n tesoro nasconsto in questa giungla!');
             enterText.x = (this.x + this.width / 2) - enterText.width / 2;
             enterText.y = this.y - 5;*/
-            let prova = new SpeechBox(game, this.player, 'Devo assolutamente trvoare il tesoro nasconsto in questa giungla!');
+            let prova = new SpeechBox(game, this, 'Devo assolutamente trvoare il tesoro nasconsto in questa giungla!');
+            
             game.time.events.add(Phaser.Timer.SECOND * 5, () => {
                 //enterText.kill();
             }, this)
