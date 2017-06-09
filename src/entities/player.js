@@ -43,6 +43,7 @@ Player.prototype.update = function () {
     }
     else {
         this.gamepad.indicator.visible = false;
+        this.animations.play('idle');
     }
 };
 
@@ -228,15 +229,8 @@ Player.prototype.enterCutscene = function () {
         enterTween.onComplete.addOnce(function () {
             this.initPlayerBody();
             
-            //PROVA TESTO
-            //this.enable = true;
-            /*let enterText = game.add.text(0, 0, 'Devo assolutamente trvoare il \n tesoro nasconsto in questa giungla!');
-            enterText.x = (this.x + this.width / 2) - enterText.width / 2;
-            enterText.y = this.y - 5;*/
-            let prova = new SpeechBox(game, this, 'Devo assolutamente trvoare il tesoro nasconsto in questa giungla!');
-            
-            game.time.events.add(Phaser.Timer.SECOND * 5, () => {
-                //enterText.kill();
+            game.time.events.add(Phaser.Timer.SECOND * 3, () => {
+                let prova = new SpeechBox(game, this, 'Devo assolutamente trvoare il tesoro nasconsto in questa giungla!');
             }, this)
         }, this);
 
