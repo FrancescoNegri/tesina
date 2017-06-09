@@ -6,7 +6,13 @@ SpeechBox = function (game, speaker, text, isBlocking, callback) {
     Phaser.Sprite.call(this, game, 0, game.world.height - this.box.height);
 
     if (typeof isBlocking === "undefined") isBlocking = true;
-    if (!callback) callback = () => { };
+    if (!callback) {
+        callback = () => { };
+        this.hasCallback = false;
+    }
+    else {
+        this.hasCallback = true;
+    }
 
     this.image = new Phaser.NinePatchImage(game, 0 + this.box.offset, game.height - (this.box.height + this.box.offset), 'blue_button02');
     this.image.targetWidth = this.box.width;
@@ -36,6 +42,7 @@ SpeechBox = function (game, speaker, text, isBlocking, callback) {
     }
     else {
         this.speaker.enable = false;
+        this.speaker.body.velocity.x = 0;
         this.blockingButton = game.add.sprite(0, 0, 'x-button');
         this.image.addChild(this.blockingButton);
         this.blockingButtonOffset = 4;
@@ -46,7 +53,7 @@ SpeechBox = function (game, speaker, text, isBlocking, callback) {
         let blockingKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         blockingKey.onDown.addOnce(() => { 
             this.killSpeechBox(callback);
-            this.speaker.enable = true;
+            if (!this.hasCallback) this.speaker.enable = true;
         });
     }
 };

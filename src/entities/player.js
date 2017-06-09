@@ -1,6 +1,7 @@
 Player = function (game, x, y) {
     Phaser.Sprite.call(this, game, x, y, 'player');
     this.enable = true;
+    this.onCutscene = false;
     this.runSpeed = 150;
     this.scalingFactor = 4;
     this.cursors = game.input.keyboard.createCursorKeys();
@@ -43,13 +44,14 @@ Player.prototype.update = function () {
     }
     else {
         this.gamepad.indicator.visible = false;
-        this.animations.play('idle');
+        if (!this.onCutscene) this.animations.play('idle');
     }
 };
 
 //CUTSCENES
 Player.prototype.win = function (_target, callback) {
     if (this.enable) {
+        this.onCutscene = true;
         _target.enable = false;
         this.body.velocity.x = 0;
         this.enable = false;
@@ -68,6 +70,7 @@ Player.prototype.win = function (_target, callback) {
 
             callback();
             this.enable = true;
+            this.onCutscene = false;
         }, this);
 
         winningTween.start();
@@ -187,6 +190,8 @@ Player.prototype.actions = function (action) {
             break;
 
         case 'jump':
+            let jumpSound = this.game.add.audio('jump');
+            jumpSound.play();
             this.body.velocity.y = -450;
             //this.animations.play('jump');
             break;
@@ -206,21 +211,21 @@ Player.prototype.enterCutscene = function () {
 
     this.enable = false;
     this.visible = false;
-    var introMusic = this.game.add.audio('intro');
+    let introMusic = this.game.add.audio('intro');
     introMusic.play();
 
-    var cameraTween = this.game.add.tween(this.game.camera);
+    let cameraTween = this.game.add.tween(this.game.camera);
     cameraTween.from({ x: this.game.world.width }, 13 * 1000, Phaser.Easing.Circular.InOut, true);
 
     game.time.events.add(Phaser.Timer.SECOND * 13, () => {
         this.visible = true;
-        var lianaTween = this.game.add.tween(this.liana);
+        let lianaTween = this.game.add.tween(this.liana);
         lianaTween.from({ x: -220, y: 100 }, 2800, null, true);
         lianaTween.onComplete.addOnce(function () {
             this.liana.kill();
         }, this);
         this.animations.add('enter', [14], 1);
-        var enterTween = this.game.add.tween(this);
+        let enterTween = this.game.add.tween(this);
         enterTween.from({ x: -200, y: -200 }, 1750, null, true);
         enterTween.onUpdateCallback(function () {
             this.scale.setTo(1 * this.scalingFactor, 1 * this.scalingFactor);
@@ -229,8 +234,8 @@ Player.prototype.enterCutscene = function () {
         enterTween.onComplete.addOnce(function () {
             this.initPlayerBody();
             
-            game.time.events.add(Phaser.Timer.SECOND * 3, () => {
-                let prova = new SpeechBox(game, this, 'Devo assolutamente trvoare il tesoro nasconsto in questa giungla!');
+            game.time.events.add(Phaser.Timer.SECOND * 1.5, () => {
+                new SpeechBox(game, this, 'Devo assolutamente trvoare il tesoro nasconsto in questa giungla!');
             }, this)
         }, this);
 

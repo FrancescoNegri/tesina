@@ -24,4 +24,3 @@ const handleBackgroundParallax = (_this) => {
     _this.bg.layer5.tilePosition.x = _this.bg.layer1.x * -0.2;
 }
 
-var playCutscene = true;

@@ -19,12 +19,12 @@ var level1State = {
         this.map.createFromObjects('Chests', 498, 'chest', 0, true, false, this.chests, Chest);
         
         this.entities = game.add.group();
-        this.fengMengbo = new FengMengbo(game, 650, 100);
+        this.fengMengbo = new FengMengbo(game, 73 * tileSize, 2 * tileSize);
         this.entities.add(this.fengMengbo);
         this.player = new Player(game, 290, 100);
         this.entities.add(this.player);
         
-        this.player.enable = false;
+        //this.player.enable = false;
         // let prova = new SpeechBox(game, this.player, 'Wow!! Questo è un testo casuale estremamente lungo e bloccante! Wow!! Questo è un testo casuale estremamente lungo e bloccante!  Devo testare il trimming del testo per mandarlo su più righe! Speriamo funzioni come deve... (BLOCCANTE)', true, () => {
         //     let testo2 = new SpeechBox(game, this.fengMengbo, 'Ciao, presto diventerò cinese! \nSetti ci sta lavorando... (NON BLOCCANTE)', false, () => {
         //         this.player.enable = true;
@@ -46,10 +46,14 @@ var level1State = {
         handleBackgroundParallax(this);
         game.physics.arcade.collide(this.entities, this.groundLayer);
         game.physics.arcade.collide(this.chests, this.groundLayer);
-        game.physics.arcade.collide(this.entities, this.entities);
+        //game.physics.arcade.collide(this.entities, this.entities);
         game.physics.arcade.overlap(this.chests, this.player, (_player, _chest) => {
             _chest.openAction(this, _player);
         });
+
+        game.physics.arcade.overlap(this.player, this.fengMengbo, () => {
+            this.fengMengbo.startCutscene(this);
+        })
 
     }
 }

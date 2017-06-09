@@ -1,17 +1,20 @@
 FengMengbo = function (game, x, y) {
-    Phaser.Sprite.call(this, game, x, y, 'fengMengbo');
+    Phaser.Sprite.call(this, game, x, y, 'feng-mengbo');
     this.enable = true;
+    this.cutsceneFlag = false;
+    this.onCutscene = false;
     this.runSpeed = 150;
     this.scalingFactor = 4;
     //this.cursors = game.input.keyboard.createCursorKeys();
 
-    this.animations.add('idle', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], 6);
-    this.animations.add('walk', [20, 21, 22, 23, 24, 25, 26, 27], 12);
+    this.animations.add('idle', [0, 1, 2, 3, 4, 5, 6], 6);
+    this.animations.add('walk', [7, 8, 9, 10, 11, 12, 13, 14], 12);
 
     this.scale.setTo(this.scalingFactor, this.scalingFactor);
     this.anchor.setTo(0.5, 0);
 
     this.initPlayerBody();
+    this.scale.setTo(-this.scalingFactor, this.scalingFactor);
 
     game.add.existing(this);
 };
@@ -21,10 +24,10 @@ FengMengbo.prototype.constructor = FengMengbo;
 
 FengMengbo.prototype.update = function () {
     if (this.enable) {
-        this.animations.play('idle');
+        this.actions('idle');
     }
     else {
-        
+        if (!this.onCutscene) this.animations.play('idle');
     }
 };
 
@@ -68,10 +71,69 @@ FengMengbo.prototype.initPlayerBody = function () {
     this.body.gravity.y = 700;
 
     var bodyDims = { width: this.body.width / this.scalingFactor, height: this.body.height / this.scalingFactor - 3 };
-    var bodyScalingFactor = { x: 3, y: 0.6 };
+    var bodyScalingFactor = { x: 6, y: 0.6 };
     //this.body.setSize(bodyDims * bodyScalingFactor.x, bodyDims * bodyScalingFactor.y, (bodyDims - (bodyDims * bodyScalingFactor.x)) / 2, (bodyDims - (bodyDims * bodyScalingFactor.y)) / 2);
     this.body.setSize(bodyDims.width * bodyScalingFactor.x, bodyDims.height * bodyScalingFactor.y, (bodyDims.width - (bodyDims.width * bodyScalingFactor.x)) / 2, bodyDims.height - (bodyDims.height * bodyScalingFactor.y));
 
     this.enable = true;
+}
+
+FengMengbo.prototype.startCutscene = function (_this) {
+    let _fengMengbo = this;
+    let _player = _this.player;
+    if (!this.cutsceneFlag) {
+        this.cutsceneFlag = true;
+        _player.onCutscene = true;
+        _player.enable = false;
+        //alert('Ciao!! Sono Feng Ciccio');
+
+        let interactionTween = this.game.add.tween(_player);
+        interactionTween.to({ x: 71 * tileSize }, 5 * Math.abs(_fengMengbo.x - _player.x), null, true);
+        interactionTween.onUpdateCallback(function () {
+            _player.animations.play('walk');
+        }, _player)
+        interactionTween.onComplete.addOnce(function () {
+            _player.onCutscene = false;
+            _player.body.velocity.x = 0;
+
+            let wooSound = game.add.audio('woo');
+            wooSound.play();
+
+            _fengMengbo.body.velocity.y = -200;
+            new SpeechBox(game, _fengMengbo, 'Altolà! Chi sei!? Non si vedono mai degli stranieri in giro da queste parti...', true, () => {
+                new SpeechBox(game, _player, 'Sono un esploratore, come può ben vedere dal mio abbigliamento! E lei chi sarebbe invece?', true, () => {
+                    new SpeechBox(game, _fengMengbo, "Il mio nome è Feng Mengbo, non ti dice nulla? Sono un famoso artista cinese e vengo in questi posti solitari per cercare l'ispirazione!", true, () => {
+                        new SpeechBox(game, _fengMengbo, "Devi sapere che una mia opera d'arte è perfino in esposizione a New York, al MOMA!\nTu, che sei un esploratore e viaggi tanto, ci sei mai stato?", true, () => {
+                            new SpeechBox(game, _player, "No, mi dispiace, la città non fa per me...\n", true, () => {
+                                new SpeechBox(game, _player, "Preferisco decisamente luoghi esotici e pieni di pericoli!\nMi è giunta voce che in questa giungla sia nascosto un tesoro, potrebbe indicarmi la strada?", true, () => {
+                                    new SpeechBox(game, _fengMengbo, "Certo, devi proseguire sempre dritto, attento a non perderti! Ora devo andare, ho avuto l'idea geniale per il mio nuovo capolavoro! Addio esploratore!!", true, () => {
+                                        _fengMengbo.body.velocity.y = -150;
+                                        let exitTween = this.game.add.tween(_fengMengbo);
+                                        exitTween.to({ x: _fengMengbo.x + 10 * tileSize }, 1600, null, true);
+                                        exitTween.onUpdateCallback(function () {
+                                            _fengMengbo.onCutscene = true;
+                                            _fengMengbo.scale.setTo(_fengMengbo.scalingFactor, _fengMengbo.scalingFactor);
+                                            _fengMengbo.animations.play('walk');
+                                        }, _fengMengbo);
+                                        exitTween.onComplete.addOnce(() => {
+                                            _fengMengbo.kill();
+                                            _player.enable = true;
+                                            _player.onCutscene = false;
+                                        }, _fengMengbo);
+
+                                        let fengRunSound = game.add.audio('feng-run');
+                                        fengRunSound.play();
+
+                                        exitTween.start();
+                                    })
+                                })
+                            })
+                        })
+                    });
+                });
+            });
+        });
+        interactionTween.start();
+    }
 }
 
