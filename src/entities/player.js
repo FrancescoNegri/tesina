@@ -235,7 +235,7 @@ Player.prototype.enterCutscene = function () {
             this.initPlayerBody();
             
             game.time.events.add(Phaser.Timer.SECOND * 1.5, () => {
-                new SpeechBox(game, this, 'Devo assolutamente trvoare il tesoro nasconsto in questa giungla!');
+                new SpeechBox(game, this, 'Devo assolutamente trovare il tesoro nascosto in questa giungla!');
             }, this)
         }, this);
 
