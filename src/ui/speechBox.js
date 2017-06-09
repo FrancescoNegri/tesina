@@ -11,20 +11,13 @@ SpeechBox = function (game, speaker, isBlocking, text, callback) {
     this.image.targetHeight = this.box.height;
     this.image.fixedToCamera = true;
 
-    //Elaborare il test --> se > 75 caratteri trova spazi e manda a capo!
-    if (text.length > 75) {
-        if (text.length < 75 * 3) {
-            console.log('lungo');
-            text = [text.slice(0, 75), '\n', text.slice(75)].join('');
-        }
-        else {
-            console.log('too long');
-            alert('DIALOGO TROPPO LUNGO! RISOLVERE!!!!! --> non posso gestirlo');
-        }
-    }
-
     this.textOffest = 5;
     this.text = game.add.text(0 + this.textOffest, 0 + this.textOffest, text, { font: "24px Arial" });
+    this.text.wordWrap = true;
+    this.text.wordWrapWidth = this.box.width;
+
+    if (this.text.height > this.box.height) alert('DIALOGO TROPPO LUNGO! RISOLVERE!!!!! --> non posso gestirlo');
+
     this.image.addChild(this.text);
     game.add.existing(this);
 
@@ -41,7 +34,7 @@ SpeechBox = function (game, speaker, isBlocking, text, callback) {
     }
     else {
         let blockingKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-        blockingKey.onDown.add(() => {this.killSpeechBox(callback)});
+        blockingKey.onDown.add(() => { this.killSpeechBox(callback) });
     }
 };
 

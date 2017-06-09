@@ -25,8 +25,11 @@ var level1State = {
         this.entities.add(this.player);
         
         this.player.enable = false;
-        let prova = new SpeechBox(game, this.player, true, '123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890 (BLOCCANTE)', () => {
-            let testo2 = new SpeechBox(game, this.fengMengbo, false, 'Ciao, presto diventerò cinese! \nSetti ci sta lavorando... (NON BLOCCANTE)', () => {this.player.enable = true});
+        let prova = new SpeechBox(game, this.player, true, 'Wow!! Questo è un testo casuale estremamente lungo e bloccante! Wow!! Questo è un testo casuale estremamente lungo e bloccante!  Devo testare il trimming del testo per mandarlo su più righe! Speriamo funzioni come deve... (BLOCCANTE)', () => {
+            let testo2 = new SpeechBox(game, this.fengMengbo, false, 'Ciao, presto diventerò cinese! \nSetti ci sta lavorando... (NON BLOCCANTE)', () => {
+                this.player.enable = true;
+                this.fengMengbo.kill();
+            });
         });
         //var image = new Phaser.NinePatchImage(game, game.width/2, game.height/2, 'blue_button02');
         //console.log(prova);
