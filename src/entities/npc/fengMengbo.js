@@ -100,39 +100,81 @@ FengMengbo.prototype.startCutscene = function (_this) {
             wooSound.play();
 
             _fengMengbo.body.velocity.y = -200;
-            new SpeechBox(game, _fengMengbo, 'Altolà! Chi sei!? Non si vedono mai degli stranieri in giro da queste parti...', true, () => {
-                new SpeechBox(game, _player, 'Sono un esploratore, come può ben vedere dal mio abbigliamento! E lei chi sarebbe invece?', true, () => {
-                    new SpeechBox(game, _fengMengbo, "Il mio nome è Feng Mengbo, non ti dice nulla? Sono un famoso artista cinese e vengo in questi posti solitari per cercare l'ispirazione!", true, () => {
-                        new SpeechBox(game, _fengMengbo, "Devi sapere che una mia opera d'arte è perfino in esposizione a New York, al MOMA!\nTu, che sei un esploratore e viaggi tanto, ci sei mai stato?", true, () => {
-                            new SpeechBox(game, _player, "No, mi dispiace, la città non fa per me...\n", true, () => {
-                                new SpeechBox(game, _player, "Preferisco decisamente luoghi esotici e pieni di pericoli!\nMi è giunta voce che in questa giungla sia nascosto un tesoro, potrebbe indicarmi la strada?", true, () => {
-                                    new SpeechBox(game, _fengMengbo, "Certo, devi proseguire sempre dritto, attento a non perderti! Ora devo andare, ho avuto l'idea geniale per il mio nuovo capolavoro! Addio esploratore!!", true, () => {
-                                        _fengMengbo.body.velocity.y = -150;
-                                        let exitTween = this.game.add.tween(_fengMengbo);
-                                        exitTween.to({ x: _fengMengbo.x + 10 * tileSize }, 1600, null, true);
-                                        exitTween.onUpdateCallback(function () {
-                                            _fengMengbo.onCutscene = true;
-                                            _fengMengbo.scale.setTo(_fengMengbo.scalingFactor, _fengMengbo.scalingFactor);
-                                            _fengMengbo.animations.play('walk');
-                                        }, _fengMengbo);
-                                        exitTween.onComplete.addOnce(() => {
-                                            _fengMengbo.kill();
-                                            _player.enable = true;
-                                            _player.onCutscene = false;
-                                        }, _fengMengbo);
 
-                                        let fengRunSound = game.add.audio('feng-run');
-                                        fengRunSound.play();
+            const CHINA_MOD = false;
 
-                                        exitTween.start();
+            if (CHINA_MOD) {
+                new SpeechBox(game, _fengMengbo, 'FeLmo! Chi esseLe tu!? Io non vedeLe mai stLanieLi in giLo da queste paLti...', true, () => {
+                    new SpeechBox(game, _player, 'Sono un esploratore, come può ben vedere dal mio abbigliamento! E lei chi sarebbe invece?', true, () => {
+                        new SpeechBox(game, _fengMengbo, "Mio nome è Feng Mengbo, non dice nulla? Io esseLe un famoso aLtista cinese e veniLe in questi posti isolati per ceLcaLe ispiLazione!", true, () => {
+                            new SpeechBox(game, _fengMengbo, "Devi sapeLe che mia opeLa d'aLte più famosa è in città di New YoLk, in museo MOMA!\nTu, che esseLe esploLatoLe e viaggiaLe tanto, esseLe mai stato a New YoLk?", true, () => {
+                                new SpeechBox(game, _player, "No, mi dispiace, la città non fa per me...\n", true, () => {
+                                    new SpeechBox(game, _player, "Preferisco decisamente luoghi esotici e pieni di pericoli!\nMi è giunta voce che in questa giungla sia nascosto un tesoro, potrebbe indicarmi la strada?", true, () => {
+                                        new SpeechBox(game, _fengMengbo, "CeLatamente, tu doveLe pLoseguire sempLe dLitto, ma attento a non peLdeLe! OLa io doveLe andaLe, ho avuto idea geniale peL mio nuovo capolavoLo! Addio esploLatoLe!!", true, () => {
+                                            _fengMengbo.body.velocity.y = -150;
+                                            let exitTween = this.game.add.tween(_fengMengbo);
+                                            exitTween.to({ x: _fengMengbo.x + 10 * tileSize }, 1600, null, true);
+                                            exitTween.onUpdateCallback(function () {
+                                                _fengMengbo.onCutscene = true;
+                                                _fengMengbo.scale.setTo(_fengMengbo.scalingFactor, _fengMengbo.scalingFactor);
+                                                _fengMengbo.animations.play('walk');
+                                            }, _fengMengbo);
+                                            exitTween.onComplete.addOnce(() => {
+                                                _fengMengbo.kill();
+                                                _player.enable = true;
+                                                _player.onCutscene = false;
+                                                wooSound.play();
+                                            }, _fengMengbo);
+
+                                            let fengRunSound = game.add.audio('feng-run');
+                                            fengRunSound.play();
+
+                                            exitTween.start();
+                                        })
                                     })
                                 })
                             })
-                        })
+                        });
                     });
                 });
-            });
+            }
+            else {
+                new SpeechBox(game, _fengMengbo, 'Altolà! Chi sei!? Non si vedono mai degli stranieri in giro da queste parti...', true, () => {
+                    new SpeechBox(game, _player, 'Sono un esploratore, come può ben vedere dal mio abbigliamento! E lei chi sarebbe invece?', true, () => {
+                        new SpeechBox(game, _fengMengbo, "Il mio nome è Feng Mengbo, non ti dice nulla? Sono un famoso artista cinese e vengo in questi posti solitari per cercare l'ispirazione!", true, () => {
+                            new SpeechBox(game, _fengMengbo, "Devi sapere che una mia opera d'arte è perfino in esposizione a New York, al MOMA!\nTu, che sei un esploratore e viaggi tanto, ci sei mai stato?", true, () => {
+                                new SpeechBox(game, _player, "No, mi dispiace, la città non fa per me...\n", true, () => {
+                                    new SpeechBox(game, _player, "Preferisco decisamente luoghi esotici e pieni di pericoli!\nMi è giunta voce che in questa giungla sia nascosto un tesoro, potrebbe indicarmi la strada?", true, () => {
+                                        new SpeechBox(game, _fengMengbo, "Certo, devi proseguire sempre dritto, attento a non perderti! Ora devo andare, ho avuto l'idea geniale per il mio nuovo capolavoro! Addio esploratore!!", true, () => {
+                                            _fengMengbo.body.velocity.y = -150;
+                                            let exitTween = this.game.add.tween(_fengMengbo);
+                                            exitTween.to({ x: _fengMengbo.x + 10 * tileSize }, 1600, null, true);
+                                            exitTween.onUpdateCallback(function () {
+                                                _fengMengbo.onCutscene = true;
+                                                _fengMengbo.scale.setTo(_fengMengbo.scalingFactor, _fengMengbo.scalingFactor);
+                                                _fengMengbo.animations.play('walk');
+                                            }, _fengMengbo);
+                                            exitTween.onComplete.addOnce(() => {
+                                                _fengMengbo.kill();
+                                                _player.enable = true;
+                                                _player.onCutscene = false;
+                                                wooSound.play();
+                                            }, _fengMengbo);
+
+                                            let fengRunSound = game.add.audio('feng-run');
+                                            fengRunSound.play();
+
+                                            exitTween.start();
+                                        })
+                                    })
+                                })
+                            })
+                        });
+                    });
+                });
+            }
         });
+
         interactionTween.start();
     }
 }

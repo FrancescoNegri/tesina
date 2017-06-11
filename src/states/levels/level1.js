@@ -17,11 +17,13 @@ var level1State = {
         this.chests = game.add.group();
         this.chests.enableBody = true;
         this.map.createFromObjects('Chests', 498, 'chest', 0, true, false, this.chests, Chest);
-        
+        this.schillersBook = new SchillersBook (game, 36.5 * tileSize, 7.2 * tileSize);
+
         this.entities = game.add.group();
         this.fengMengbo = new FengMengbo(game, 73 * tileSize, 2 * tileSize);
         this.entities.add(this.fengMengbo);
-        this.player = new Player(game, 290, 100);
+        if (!playCutscene) this.player = new Player(game, 35 * tileSize, 0)
+        else this.player = new Player(game, 290, 100);
         this.entities.add(this.player);
         
         //this.player.enable = false;
@@ -36,6 +38,7 @@ var level1State = {
     render: function () {
         if (debugMode) {
             game.debug.bodyInfo(this.player, 64, 10);
+            game.debug.body(this.schillersBook, 'rgba(255,0,0,0.5)');
             //game.debug.spriteCoords(this.a, 64, 10);
             this.entities.forEach((entity) => { game.debug.body(entity, 'rgba(255,0,0,0.5)') });
             this.chests.forEach((chest) => { game.debug.body(chest, 'rgba(255,0,0,0.5)') });
@@ -53,6 +56,9 @@ var level1State = {
 
         game.physics.arcade.overlap(this.player, this.fengMengbo, () => {
             this.fengMengbo.startCutscene(this);
+        })
+        game.physics.arcade.overlap(this.player, this.schillersBook, () => {
+            this.schillersBook.startCutscene(this);
         })
 
     }

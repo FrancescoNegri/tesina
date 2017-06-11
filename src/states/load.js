@@ -6,6 +6,7 @@ var loadState = {
         game.load.spritesheet('player', 'assets/player1.png', 25, 45);
         game.load.spritesheet('feng-mengbo', 'assets/feng-mengbo.png', 25, 45);
         game.load.spritesheet('chest', 'assets/chest.png', 32, 32);
+        game.load.spritesheet('book', 'assets/book.png', 32, 28);
         game.load.spritesheet('liana', 'assets/liana.png', 15, 60);
 
         //UI
@@ -17,6 +18,7 @@ var loadState = {
         //AUDIO
         game.load.audio('intro', 'assets/audio/intro.m4a');
         game.load.audio('jump', 'assets/audio/jump.wav');
+        game.load.audio('success', 'assets/audio/success.wav');
         game.load.audio('woo', 'assets/audio/woo.wav');
         game.load.audio('feng-run', 'assets/audio/feng-run.wav');
 
