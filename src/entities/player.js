@@ -2,7 +2,7 @@ Player = function (game, x, y) {
     Phaser.Sprite.call(this, game, x, y, 'player');
     this.enable = true;
     this.onCutscene = false;
-    this.runSpeed = 150;
+    this.runSpeed = 250;
     this.scalingFactor = 4;
     this.cursors = game.input.keyboard.createCursorKeys();
 

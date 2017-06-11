@@ -145,7 +145,7 @@ FengMengbo.prototype.startCutscene = function (_this) {
                             new SpeechBox(game, _fengMengbo, "Devi sapere che una mia opera d'arte è perfino in esposizione a New York, al MOMA!\nTu, che sei un esploratore e viaggi tanto, ci sei mai stato?", true, () => {
                                 new SpeechBox(game, _player, "No, mi dispiace, la città non fa per me...\n", true, () => {
                                     new SpeechBox(game, _player, "Preferisco decisamente luoghi esotici e pieni di pericoli!\nMi è giunta voce che in questa giungla sia nascosto un tesoro, potrebbe indicarmi la strada?", true, () => {
-                                        new SpeechBox(game, _fengMengbo, "Certo, devi proseguire sempre dritto, attento a non perderti! Ora devo andare, ho avuto l'idea geniale per il mio nuovo capolavoro! Addio esploratore!!", true, () => {
+                                        new SpeechBox(game, _fengMengbo, "Certo, devi proseguire sempre dritto, attento a non perderti! Ora devo andare, ho avuto un'idea geniale per il mio nuovo capolavoro! Addio esploratore!!", true, () => {
                                             _fengMengbo.body.velocity.y = -150;
                                             let exitTween = this.game.add.tween(_fengMengbo);
                                             exitTween.to({ x: _fengMengbo.x + 10 * tileSize }, 1600, null, true);

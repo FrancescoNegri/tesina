@@ -17,28 +17,22 @@ var level1State = {
         this.chests = game.add.group();
         this.chests.enableBody = true;
         this.map.createFromObjects('Chests', 498, 'chest', 0, true, false, this.chests, Chest);
-        this.schillersBook = new SchillersBook (game, 36.5 * tileSize, 7.2 * tileSize);
+        this.schillersBook = new SchillersBook(game, 36.5 * tileSize, 7.2 * tileSize);
+        this.quintiliansStatue = new QuintiliansStatue(game, 7 * tileSize, 4 * tileSize);
 
         this.entities = game.add.group();
         this.fengMengbo = new FengMengbo(game, 73 * tileSize, 2 * tileSize);
         this.entities.add(this.fengMengbo);
-        if (!playCutscene) this.player = new Player(game, 35 * tileSize, 0)
+        if (!playCutscene) this.player = new Player(game, 15 * tileSize, 0)
         else this.player = new Player(game, 290, 100);
         this.entities.add(this.player);
-        
-        //this.player.enable = false;
-        // let prova = new SpeechBox(game, this.player, 'Wow!! Questo è un testo casuale estremamente lungo e bloccante! Wow!! Questo è un testo casuale estremamente lungo e bloccante!  Devo testare il trimming del testo per mandarlo su più righe! Speriamo funzioni come deve... (BLOCCANTE)', true, () => {
-        //     let testo2 = new SpeechBox(game, this.fengMengbo, 'Ciao, presto diventerò cinese! \nSetti ci sta lavorando... (NON BLOCCANTE)', false, () => {
-        //         this.player.enable = true;
-        //         this.fengMengbo.kill();
-        //     });
-        // });
     },
 
     render: function () {
         if (debugMode) {
             game.debug.bodyInfo(this.player, 64, 10);
             game.debug.body(this.schillersBook, 'rgba(255,0,0,0.5)');
+            game.debug.body(this.quintiliansStatue, 'rgba(255,0,0,0.5)');
             //game.debug.spriteCoords(this.a, 64, 10);
             this.entities.forEach((entity) => { game.debug.body(entity, 'rgba(255,0,0,0.5)') });
             this.chests.forEach((chest) => { game.debug.body(chest, 'rgba(255,0,0,0.5)') });
@@ -59,6 +53,9 @@ var level1State = {
         })
         game.physics.arcade.overlap(this.player, this.schillersBook, () => {
             this.schillersBook.startCutscene(this);
+        })
+        game.physics.arcade.overlap(this.player, this.quintiliansStatue, () => {
+            this.quintiliansStatue.startCutscene(this);
         })
 
     }

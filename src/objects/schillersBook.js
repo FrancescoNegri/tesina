@@ -52,13 +52,15 @@ SchillersBook.prototype.startCutscene = function (_this) {
                         _schillersBook.kill();
                         let successSound = game.add.audio('success');
                         successSound.play();
-                        new SpeechBox(game, _player, "Sulla copertina c'è scritto Callia (o della bellezza), di F. Schiller. \nChissà di cosa parla...", true, () => {
-                            new SpeechBox(game, _player, "All'interno si vede una frase annotata che dice...\n L'UOMO É VERAMENTE UOMO SOLO QUANDO GIOCA", true, () => {
-                                new SpeechBox(game, _player, "Chissà cosa significa....\nMeglio andare comunque, ho pur sempre un tesoro da trovare!", true, () => {
-                                    _player.enable = true;
-                                    _player.onCutscene = false;
+                        new SpeechBox(game, _player, "Complimenti! Hai raccolto il LIBRO MISTERIOSO!", false, () => {
+                            new SpeechBox(game, _player, "Sulla copertina c'è scritto Callia (o della bellezza), di F. Schiller. \nChissà di cosa parla...", true, () => {
+                                new SpeechBox(game, _player, "All'interno si vede una frase annotata che dice...\n'L'UOMO É VERAMENTE UOMO SOLO QUANDO GIOCA'", true, () => {
+                                    new SpeechBox(game, _player, "Chissà cosa significa....\nMeglio andare comunque, ho pur sempre un tesoro da trovare!", true, () => {
+                                        _player.enable = true;
+                                        _player.onCutscene = false;
 
-                                    wooSound.play();
+                                        wooSound.play();
+                                    })
                                 })
                             })
                         })

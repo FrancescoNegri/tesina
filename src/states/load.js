@@ -4,6 +4,7 @@ var loadState = {
 
         //SPRITES
         game.load.spritesheet('player', 'assets/player1.png', 25, 45);
+        game.load.spritesheet('quintilian', 'assets/quintilian.png', 25, 45);
         game.load.spritesheet('feng-mengbo', 'assets/feng-mengbo.png', 25, 45);
         game.load.spritesheet('chest', 'assets/chest.png', 32, 32);
         game.load.spritesheet('book', 'assets/book.png', 32, 28);
