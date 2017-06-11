@@ -36,7 +36,7 @@ SpeechBox = function (game, speaker, text, isBlocking, callback) {
 
     if (!isBlocking) {
         //Settare un tempo minimo e poi un tempo bonus dipendente dalla lunghezza --> eventualmente premere tasto per procedere
-        game.time.events.add(Phaser.Timer.SECOND * 5, () => {
+        game.time.events.add(Phaser.Timer.SECOND * 3, () => {
             this.killSpeechBox(callback);
         }, this)
     }
@@ -64,21 +64,6 @@ SpeechBox.prototype.constructor = SpeechBox;
 SpeechBox.prototype.update = function () {
     this.speakerIndicator.x = this.speaker.x - this.speakerIndicator.width / 2;
     this.speakerIndicator.y = this.speaker.y - this.speakerIndicator.height / 4;
-    /*this.anchor.setTo(0.12, 0.12);
-    this.animations.play('right');
-    this.x = this.speaker.x;
-    this.y = this.speaker.y - this.height / 2;
-
-
-
-    if (this.speaker.scale.x > 0) {
-        this.scale.setTo(this.scalingFactor + 10, this.scalingFactor);
-        this.text.x = this.x + this.text.width / 2 + 2;
-        this.text.y = this.y + this.text.height / 2 + 20;
-    }
-    else if (this.speaker.scale.x < 0) {
-        this.scale.setTo(-this.scalingFactor, this.scalingFactor);
-    }*/
 };
 
 SpeechBox.prototype.killSpeechBox = function (callback) {

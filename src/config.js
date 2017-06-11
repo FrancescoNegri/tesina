@@ -7,7 +7,6 @@ var playCutscene = false;
 
 //TODO:
 /*
-- aggiungere American Society for Aesthetics
 - Fare cutscene finale e apertura chest + vittoria!
 - Creare level definitivo
 - Disporre le cutscene e gli oggetti in modo sensato e giusto

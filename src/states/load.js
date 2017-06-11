@@ -8,6 +8,7 @@ var loadState = {
         game.load.spritesheet('feng-mengbo', 'assets/feng-mengbo.png', 25, 45);
         game.load.spritesheet('chest', 'assets/chest.png', 32, 32);
         game.load.spritesheet('book', 'assets/book.png', 32, 28);
+        game.load.spritesheet('asfa-sign', 'assets/asfa-sign.png', 88, 95);
         game.load.spritesheet('liana', 'assets/liana.png', 15, 60);
 
         //UI
