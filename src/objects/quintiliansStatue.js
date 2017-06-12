@@ -11,7 +11,7 @@ QuintiliansStatue = function (game, x, y) {
     this.immovable = true;
 
     var bodyDims = { width: this.body.width / this.scalingFactor, height: this.body.height / this.scalingFactor - 4 };
-    var bodyScalingFactor = { x: 5, y: 0.3 };
+    var bodyScalingFactor = { x: 8, y: 0.3 };
     this.body.setSize(bodyDims.width * bodyScalingFactor.x, bodyDims.height * bodyScalingFactor.y, (bodyDims.width - (bodyDims.width * bodyScalingFactor.x)) / 2, bodyDims.height - (bodyDims.height * bodyScalingFactor.y));
 
     this.closed = true;
