@@ -1,4 +1,4 @@
-var testState = {
+var victoryState = {
     create: function() {
         var nameLabel = game.add.text(80, 80, 'Testing (premere W per andare al livello 2)', {font: '25px Arial', fill: '#FFFFFF'});
 

@@ -123,7 +123,6 @@ FengMengbo.prototype.startCutscene = function (_this) {
                                                 _fengMengbo.kill();
                                                 _player.enable = true;
                                                 _player.onCutscene = false;
-                                                wooSound.play();
                                             }, _fengMengbo);
 
                                             let fengRunSound = game.add.audio('feng-run');
@@ -158,7 +157,6 @@ FengMengbo.prototype.startCutscene = function (_this) {
                                                 _fengMengbo.kill();
                                                 _player.enable = true;
                                                 _player.onCutscene = false;
-                                                wooSound.play();
                                             }, _fengMengbo);
 
                                             let fengRunSound = game.add.audio('feng-run');

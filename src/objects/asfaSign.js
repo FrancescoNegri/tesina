@@ -57,8 +57,6 @@ ASFASign.prototype.startCutscene = function (_this) {
                                 new SpeechBox(game, _player, "Certo che di cose strane se ne incontrano in questo posto...\nQualcosa mi dice che il peggio deve ancora arrivare...Meglio muoversi!", true, () => {
                                     _player.enable = true;
                                     _player.onCutscene = false;
-
-                                    wooSound.play();
                                 })
                             })
                         })

@@ -20,8 +20,10 @@ var loadState = {
         //AUDIO
         game.load.audio('intro', 'assets/audio/intro.m4a');
         game.load.audio('jump', 'assets/audio/jump.wav');
-        game.load.audio('success', 'assets/audio/success.wav');
-        game.load.audio('woo', 'assets/audio/woo.wav');
+        game.load.audio('success', 'assets/audio/object.wav');
+        game.load.audio('chest-open', 'assets/audio/find-something.wav');
+        game.load.audio('woo', 'assets/audio/pokeball.wav');
+        game.load.audio('click', 'assets/audio/click.wav');
         game.load.audio('feng-run', 'assets/audio/feng-run.wav');
 
 

@@ -36,7 +36,7 @@ SpeechBox = function (game, speaker, text, isBlocking, callback) {
 
     if (!isBlocking) {
         //Settare un tempo minimo e poi un tempo bonus dipendente dalla lunghezza --> eventualmente premere tasto per procedere
-        game.time.events.add(Phaser.Timer.SECOND * 3, () => {
+        game.time.events.add(Phaser.Timer.SECOND * 2, () => {
             this.killSpeechBox(callback);
         }, this)
     }
@@ -52,6 +52,7 @@ SpeechBox = function (game, speaker, text, isBlocking, callback) {
 
         let blockingKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         blockingKey.onDown.addOnce(() => { 
+            game.add.audio('click').play();
             this.killSpeechBox(callback);
             if (!this.hasCallback) this.speaker.enable = true;
         });
@@ -69,5 +70,7 @@ SpeechBox.prototype.update = function () {
 SpeechBox.prototype.killSpeechBox = function (callback) {
     this.image.kill();
     this.speakerIndicator.kill();
-    callback();
+    game.time.events.add(Phaser.Timer.SECOND * 0.1, () => {
+        callback();
+    });
 }

@@ -11,7 +11,7 @@ SchillersBook = function (game, x, y) {
     this.immovable = true;
 
     var bodyDims = { width: this.body.width / this.scalingFactor, height: this.body.height / this.scalingFactor - 4 };
-    var bodyScalingFactor = { x: 2, y: 1 };
+    var bodyScalingFactor = { x: 4, y: 1 };
     this.body.setSize(bodyDims.width * bodyScalingFactor.x, bodyDims.height * bodyScalingFactor.y, (bodyDims.width - (bodyDims.width * bodyScalingFactor.x)) / 2, bodyDims.height - (bodyDims.height * bodyScalingFactor.y));
 
     this.closed = true;
@@ -39,7 +39,7 @@ SchillersBook.prototype.startCutscene = function (_this) {
         wooSound.play();
         game.time.events.add(Phaser.Timer.SECOND * 0, () => {
             let approachBookTween = this.game.add.tween(_player);
-            if (_player.x > _schillersBook.x) approachBookTween.to({ x: _schillersBook.x + 2 * tileSize }, 1100, null, true)
+            if (_player.x > _schillersBook.x) approachBookTween.to({ x: _schillersBook.x + 2 * tileSize }, (_schillersBook.x - _player.x) * 10000, null, true)
             else approachBookTween.to({ x: _schillersBook.x - .5 * tileSize }, 300, null, true)
             approachBookTween.onUpdateCallback(function () {
                 _player.animations.play('walk');
@@ -59,8 +59,6 @@ SchillersBook.prototype.startCutscene = function (_this) {
                                     new SpeechBox(game, _player, "Chissà cosa significa....\nMeglio andare comunque, ho pur sempre un tesoro da trovare!", true, () => {
                                         _player.enable = true;
                                         _player.onCutscene = false;
-
-                                        wooSound.play();
                                     })
                                 })
                             })

@@ -3,14 +3,13 @@ const tileSize = 64;
 const debugMode = false;
 const fullScreen = true;
 const audioFlag = true;
-var playCutscene = true;
+var playCutscene = false;
 
 //TODO:
 /* 
-- Fare cutscene finale e apertura chest + vittoria!
+- victoryState
 - Calibrare correttamente i tempi dei tween
 - Aggiungere supporto completo XBOX Gamepad
-- Rivedere musica intro
 - Rifare menu iniziale
 - Rifare loading screen
 */

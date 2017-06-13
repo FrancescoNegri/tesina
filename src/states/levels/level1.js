@@ -18,7 +18,7 @@ var level1State = {
         this.groundLayer.resizeWorld();
 
         //SPRITES
-        this.chests = game.add.group();
+        //this.chests = game.add.group();
         // this.chests.enableBody = true;
         // this.map.createFromObjects('Chests', 498, 'chest', 0, true, false, this.chests, Chest);
 
@@ -26,11 +26,13 @@ var level1State = {
         this.quintiliansStatue = new QuintiliansStatue(game, 36 * tileSize, 5 * tileSize);
         this.schillersBook = new SchillersBook(game, 78 * tileSize, 3.14 * tileSize);
         this.fengMengbo = new FengMengbo(game, 160 * tileSize, 3 * tileSize);
+        this.chest = new Chest(game, 198 * tileSize, 1.7 * tileSize);
 
         this.entities = game.add.group();
 
         this.interactors.add(this.quintiliansStatue);
         this.interactors.add(this.schillersBook);
+        this.interactors.add(this.chest);
 
         if (!playCutscene) this.player = new Player(game, 150 * tileSize, 0)
         else this.player = new Player(game, 290, 100);
@@ -44,7 +46,7 @@ var level1State = {
             game.debug.bodyInfo(this.player, 64, 10);
             this.entities.forEach((entity) => { game.debug.body(entity, 'rgba(255,0,0,0.5)') });
             this.interactors.forEach((interactor) => { game.debug.body(interactor, 'rgba(255,0,0,0.5)') });
-            this.chests.forEach((chest) => { game.debug.body(chest, 'rgba(255,0,0,0.5)') });
+            //this.chests.forEach((chest) => { game.debug.body(chest, 'rgba(255,0,0,0.5)') });
         }
     },
 

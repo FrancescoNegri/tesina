@@ -7,15 +7,12 @@ Chest = function (game, x, y) {
 
     this.game.physics.enable(this, Phaser.Physics.ARCADE);
     this.body.collideWorldBounds = true;
-    this.body.gravity.y = 700;
+    this.body.gravity.y = 0;
     this.immovable = true;
 
-    this.animations.add('closed'[0]);
-    this.animations.add('opened', [1]);
-
-    var bodyDims = { width: this.body.width / this.scalingFactor, height: this.body.height / this.scalingFactor - 4};
-    var bodyScalingFactor = { x: 3, y: 0.8 };
-    this.body.setSize(bodyDims.width * bodyScalingFactor.x, bodyDims.height * bodyScalingFactor.y, (bodyDims.width - (bodyDims.width * bodyScalingFactor.x)) / 2, bodyDims.height - (bodyDims.height * bodyScalingFactor.y));
+    var bodyDims = { width: this.body.width / this.scalingFactor, height: this.body.height / this.scalingFactor - 4 };
+    var bodyScalingFactor = { x: 4.5, y: 1 };
+    this.body.setSize(bodyDims.width * bodyScalingFactor.x, bodyDims.height * bodyScalingFactor.y, (bodyDims.width - (bodyDims.width * bodyScalingFactor.x)), bodyDims.height - (bodyDims.height * bodyScalingFactor.y));
 
     this.closed = true;
 
@@ -26,16 +23,46 @@ Chest.prototype = Object.create(Phaser.Sprite.prototype);
 Chest.prototype.constructor = Chest;
 
 Chest.prototype.update = function () {
-    if (this.closed) this.animations.play('closed')
-    else this.animations.play('opened');
 };
 
-Chest.prototype.openAction = function (_this, agent) {
+Chest.prototype.startCutscene = function (_this) {
     if (this.enable) {
-        //game.state.start('test');
-        agent.win(this, () => {
-            this.closed = false;
-            game.state.start('test');
-        });
+        this.enable = false;
+        let _chest = this;
+        let _player = _this.player;
+
+        _player.enable = false;
+        _player.onCutscene = true;
+        _player.body.velocity.x = 0;
+        _player.animations.play('idle');
+        _player.body.velocity.y = -400;
+        let wooSound = game.add.audio('woo');
+        wooSound.play();
+        game.time.events.add(Phaser.Timer.SECOND * 0, () => {
+
+            new SpeechBox(game, _player, 'Finalmente! Ecco il tesoro nascosto in questa giungla!!', true, () => {
+                let approachChestTween = this.game.add.tween(_player);
+                approachChestTween.to({ x: _chest.x - .5 * tileSize }, 1000, null, true)
+                approachChestTween.onUpdateCallback(function () {
+                    _player.animations.play('walk');
+                }, _player);
+                approachChestTween.onComplete.addOnce(function () {
+                    _player.onCutscene = false;
+                    _player.body.velocity.x = 0;
+                    _player.animations.play('idle');
+
+                    new SpeechBox(game, _player, 'Sembra nasconda proprio un bel tesoro! Devo aprirla assolutamente!!', true, () => {
+                        _chest.frame = 1;
+                        let openSound = game.add.audio('chest-open');
+                        openSound.play();
+                        game.time.events.add(Phaser.Timer.SECOND * 1, () => {
+                            game.camera.fade(null, 1500);
+                            game.camera.onFadeComplete.add(() => { game.state.start('victory'); }, this);
+                        })
+                    });
+                });
+                approachChestTween.start();
+            });
+        }, this);
     }
 }

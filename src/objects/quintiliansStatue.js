@@ -34,13 +34,12 @@ QuintiliansStatue.prototype.startCutscene = function (_this) {
         _player.enable = false;
         _player.onCutscene = true;
         _player.body.velocity.x = 0;
-        if (_player.x > _quintiliansStatue.x) _player.scale.x = -1 * _player.scalingFactor;
+        _player.scale.x = -1 * _player.scalingFactor;
         let wooSound = game.add.audio('woo');
         wooSound.play();
         game.time.events.add(Phaser.Timer.SECOND * 0, () => {
             let approachStatueTween = this.game.add.tween(_player);
-            if (_player.x < _quintiliansStatue.x) approachStatueTween.to({ x: _quintiliansStatue.x - 1 * tileSize }, 400, null, true)
-            else approachStatueTween.to({ x: _quintiliansStatue.x + 2.2 * tileSize }, 400, null, true)
+            approachStatueTween.to({ x: _quintiliansStatue.x + 2.2 * tileSize }, (_player.x - _quintiliansStatue.x) / 500 * 1000, null, true)
             approachStatueTween.onUpdateCallback(function () {
                 _player.animations.play('walk');
             }, _player);
@@ -59,8 +58,6 @@ QuintiliansStatue.prototype.startCutscene = function (_this) {
                                     new SpeechBox(game, _player, "Comunque non ho altro tempo da perdere! \nUn tesoro mi aspetta!!", true, () => {
                                         _player.enable = true;
                                         _player.onCutscene = false;
-
-                                        wooSound.play();
                                     })
                                 })
                             })
