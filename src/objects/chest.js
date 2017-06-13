@@ -11,7 +11,7 @@ Chest = function (game, x, y) {
     this.immovable = true;
 
     var bodyDims = { width: this.body.width / this.scalingFactor, height: this.body.height / this.scalingFactor - 4 };
-    var bodyScalingFactor = { x: 4.5, y: 1 };
+    var bodyScalingFactor = { x: 4, y: 1 };
     this.body.setSize(bodyDims.width * bodyScalingFactor.x, bodyDims.height * bodyScalingFactor.y, (bodyDims.width - (bodyDims.width * bodyScalingFactor.x)), bodyDims.height - (bodyDims.height * bodyScalingFactor.y));
 
     this.closed = true;

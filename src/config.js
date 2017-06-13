@@ -3,12 +3,11 @@ const tileSize = 64;
 const debugMode = false;
 const fullScreen = true;
 const audioFlag = true;
-var playCutscene = false;
+var playCutscene = true;
 
 //TODO:
 /* 
 - victoryState
-- Calibrare correttamente i tempi dei tween
 - Aggiungere supporto completo XBOX Gamepad
 - Rifare menu iniziale
 - Rifare loading screen

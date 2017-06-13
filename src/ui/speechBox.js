@@ -69,8 +69,8 @@ SpeechBox.prototype.update = function () {
 
 SpeechBox.prototype.killSpeechBox = function (callback) {
     this.image.kill();
-    this.speakerIndicator.kill();
     game.time.events.add(Phaser.Timer.SECOND * 0.1, () => {
+        this.speakerIndicator.kill();
         callback();
     });
 }
