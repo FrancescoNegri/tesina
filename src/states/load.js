@@ -7,7 +7,7 @@ var loadState = {
         loadingLabel.y = game.world.centerY;
 
         //SPRITES
-        game.load.spritesheet('player', 'assets/player1.png', 25, 45);
+        game.load.spritesheet('player', 'assets/player.png', 25, 46);
         game.load.spritesheet('quintilian', 'assets/quintilian.png', 25, 45);
         game.load.spritesheet('feng-mengbo', 'assets/feng-mengbo.png', 25, 45);
         game.load.spritesheet('chest', 'assets/chest.png', 32, 32);
