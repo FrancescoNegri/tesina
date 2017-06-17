@@ -6,7 +6,7 @@ Player = function (game, x, y) {
     this.scalingFactor = 4;
     this.cursors = game.input.keyboard.createCursorKeys();
 
-    this.gamepad = { enable: false };
+    this.gamepad = { enabled: false };
     this.initGamepad();
 
     //this.animations.add('idle', [0, 1], 3);
@@ -49,12 +49,8 @@ Player.prototype.update = function () {
     if (this.enable) {
         this.checkForGamepad();
 
-        if (!this.gamepad.enable)
+        if (!this.gamepad.enabled)
             this.updateKeyboard();
-
-        if (this.gamepad.enable) {
-            this.updateGamepad();
-        }
     }
     else {
         this.gamepad.indicator.visible = false;
@@ -64,25 +60,19 @@ Player.prototype.update = function () {
 
 //KEYBOARD
 Player.prototype.updateKeyboard = function () {
-    if (this.cursors.left.isDown /*&& this.body.velocity.y == 0*/) {
+    if (this.cursors.left.isDown) {
         this.actions('walk-left');
     }
-    else if (this.cursors.right.isDown /*&& this.body.velocity.y == 0*/) {
+    else if (this.cursors.right.isDown) {
         this.actions('walk-right');
     }
-    else if (!this.gamepad.enable) {
+    else if (!this.gamepad.enabled) {
         this.actions('idle');
     }
 
     if (this.cursors.up.isDown && this.body.velocity.y == 0 && this.y > 0) {
         this.actions('jump');
     }
-    /*else if (this.cursors.up.isDown) {
-        this.y += -this.runSpeed;
-    }
-    else if (this.cursors.down.isDown) {
-        this.y += this.runSpeed;
-    }*/
 }
 
 //GAMEPAD
@@ -93,24 +83,22 @@ Player.prototype.initGamepad = function () {
     this.gamepad.indicator.fixedToCamera = true;
 
     this.gamepad.pad1 = game.input.gamepad.pad1;
-
-    //this.player.gamepad.enable = true;
-    //this.player.gamepad.pad = this.pad1;
 }
 Player.prototype.checkForGamepad = function () {
     if (!this.gamepad.indicator.visible) this.gamepad.indicator.visible = true;
     // Pad "connected or not" indicator
     try {
         if (game.input.gamepad.supported && game.input.gamepad.active && this.gamepad.pad1.connected) {
-
+            if (!this.gamepad.enabled) console.log('controller connected');
             this.gamepad.indicator.animations.frame = 0;
-            this.gamepad.enable = true;
+            this.gamepad.enabled = true;
+            this.updateGamepad();
         }
 
         else {
-
+            if (this.gamepad.enabled) console.log('controller disconnected');
             this.gamepad.indicator.animations.frame = 1;
-            this.gamepad.enable = false;
+            this.gamepad.enabled = false;
         }
     }
     catch (error) {

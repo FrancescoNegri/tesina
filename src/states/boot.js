@@ -7,7 +7,7 @@ var bootState = {
         game.scale.refresh();
 
         if (!audioFlag) game.sound.mute = true;
-        
+
         game.input.gamepad.start();
 
         game.state.start('load');
