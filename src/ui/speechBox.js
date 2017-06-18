@@ -112,8 +112,7 @@ SpeechBox.prototype.checkForGamepad = function () {
 }
 SpeechBox.prototype.updateGamepad = function () {
     //BUTTONS
-    if (this.gamepad.pad1.justReleased(Phaser.Gamepad.XBOX360_A, 100)) {
-        console.log('A pressed');
+    if (this.gamepad.pad1.justReleased(Phaser.Gamepad.XBOX360_A, 50)) {
         this.gamepad = { active: false };
         this.keyPressed();
     }

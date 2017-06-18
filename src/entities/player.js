@@ -26,6 +26,9 @@ Player = function (game, x, y) {
 
     if (playCutscene) this.enterCutscene()
     else this.initPlayerBody();
+
+    let fullScreenKey = game.input.keyboard.addKey(Phaser.Keyboard.F11);
+    fullScreenKey.onDown.add( () => {goFullScreen()}, this);
 };
 
 Player.prototype = Object.create(Phaser.Sprite.prototype);

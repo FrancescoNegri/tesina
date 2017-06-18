@@ -30,6 +30,8 @@ var loadState = {
         game.load.audio('click', 'assets/audio/click.wav');
         game.load.audio('feng-run', 'assets/audio/feng-run.wav');
 
+        //TITLE
+        game.load.image('title-text', 'assets/title-text.png');
 
         //BACKGROUND
         game.load.image('bg_layer1', 'assets/bg/plx-1.png');
