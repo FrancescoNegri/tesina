@@ -34,7 +34,7 @@ var level1State = {
         this.interactors.add(this.schillersBook);
         this.interactors.add(this.chest);
 
-        if (!playCutscene) this.player = new Player(game, 150 * tileSize, 0)
+        if (!playCutscene) this.player = new Player(game, 1 * tileSize, 0)
         else this.player = new Player(game, 290, 100);
 
         this.entities.add(this.fengMengbo);

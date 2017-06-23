@@ -1,4 +1,7 @@
 var bootState = {
+    preload: function () {
+        game.load.image('loading', 'assets/loading.png');
+    },
     create: function () {
         game.physics.startSystem(Phaser.Physics.ARCADE);
 

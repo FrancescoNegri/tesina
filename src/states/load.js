@@ -1,10 +1,6 @@
 var loadState = {
     preload: function () {
-        let style = { font: "bold 40px Arial", fill: "#fff"};
-        let loadingLabel = game.add.text(0, 0, 'loading...', style);
-        loadingLabel.anchor.setTo(0.5);
-        loadingLabel.x = game.world.centerX;
-        loadingLabel.y = game.world.centerY;
+        let loadingLabel = game.add.image(0, 0, 'loading');
 
         //SPRITES
         game.load.spritesheet('player', 'assets/player.png', 25, 46);
@@ -32,6 +28,7 @@ var loadState = {
 
         //TITLE
         game.load.image('title-text', 'assets/title-text.png');
+        game.load.image('title-start', 'assets/title-start.png');
 
         //BACKGROUND
         game.load.image('bg_layer1', 'assets/bg/plx-1.png');
