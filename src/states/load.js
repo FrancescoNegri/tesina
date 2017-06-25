@@ -15,7 +15,6 @@ var loadState = {
         game.load.spritesheet('controller-indicator', 'assets/ui/controller-indicator.png', 16, 16);
         game.load.spritesheet('speech-bubble', 'assets/ui/speech-bubble.png', 32, 32);
         game.load.spritesheet('xbox-buttons', 'assets/ui/xbox-buttons.png', 16, 16);
-        game.load.spritesheet('speaker-indicator', 'assets/ui/speaker-indicator.png', 22, 32);
 
         //AUDIO
         game.load.audio('intro', 'assets/audio/intro.m4a');
