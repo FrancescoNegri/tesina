@@ -1,5 +1,9 @@
+let gamepad;
+
 var menuState = {
     create: function () {
+        gamepad = game.input.gamepad;
+
         let logo = game.add.image(0, 0, 'title-text');
         let start = game.add.image(0, 0, 'title-start');
 
@@ -15,5 +19,13 @@ var menuState = {
         goFullScreen();
         game.canvas.style.cursor = 'none';
         game.state.start('level1');
+    },
+
+    update: function () {
+        if (gamepad.supported && gamepad.active && gamepad.pad1.connected) {
+            if (gamepad.pad1.justReleased(Phaser.Gamepad.XBOX360_A, 30)) {
+                this.start();
+            }
+        }
     }
 }

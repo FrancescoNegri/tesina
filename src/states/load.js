@@ -28,6 +28,7 @@ var loadState = {
         //TITLE
         game.load.image('title-text', 'assets/title-text.png');
         game.load.image('title-start', 'assets/title-start.png');
+        game.load.image('victory-text', 'assets/victory-text.png');
 
         //BACKGROUND
         game.load.image('bg_layer1', 'assets/bg/plx-1.png');

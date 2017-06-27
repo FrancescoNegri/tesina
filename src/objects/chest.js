@@ -57,7 +57,10 @@ Chest.prototype.startCutscene = function (_this) {
                         openSound.play();
                         game.time.events.add(Phaser.Timer.SECOND * 1, () => {
                             game.camera.fade(null, 1500);
-                            game.camera.onFadeComplete.add(() => { game.state.start('victory'); }, this);
+                            game.camera.onFadeComplete.add(() => {
+                                goFullScreen();
+                                game.state.start('victory');
+                            }, this);
                         })
                     });
                 });

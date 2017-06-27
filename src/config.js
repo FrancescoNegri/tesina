@@ -18,5 +18,4 @@ const goFullScreen = () => {
 //TODO:
 /* 
 - victoryState
-- Aggiungere supporto completo XBOX Gamepad (anche al menu iniziale)
 */
