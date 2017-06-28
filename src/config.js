@@ -14,8 +14,3 @@ const goFullScreen = () => {
         game.scale.stopFullScreen();
     }
 }
-
-//TODO:
-/* 
-- victoryState
-*/

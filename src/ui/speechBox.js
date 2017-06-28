@@ -25,7 +25,7 @@ SpeechBox = function (game, speaker, text, isBlocking, callback) {
     this.text.wordWrap = true;
     this.text.wordWrapWidth = this.box.width;
 
-    if (this.text.height > this.box.height) alert('DIALOGO TROPPO LUNGO! RISOLVERE!!!!! --> non posso gestirlo');
+    if (this.text.height > this.box.height) console.log('DIALOGO TROPPO LUNGO! RISOLVERE!!!!! --> non posso gestirlo');
 
     this.image.addChild(this.text);
     game.add.existing(this);

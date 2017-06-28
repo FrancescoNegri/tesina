@@ -85,7 +85,6 @@ FengMengbo.prototype.startCutscene = function (_this) {
         this.cutsceneFlag = true;
         _player.onCutscene = true;
         _player.enable = false;
-        //alert('Ciao!! Sono Feng Ciccio');
 
         let interactionTween = this.game.add.tween(_player);
         interactionTween.to({ x: this.x - 2 * tileSize }, 3 * Math.abs(_fengMengbo.x - _player.x), null, true);
