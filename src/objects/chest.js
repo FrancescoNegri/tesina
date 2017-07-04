@@ -49,6 +49,7 @@ Chest.prototype.startCutscene = function (_this) {
                 approachChestTween.onComplete.addOnce(function () {
                     _player.onCutscene = false;
                     _player.body.velocity.x = 0;
+                    _player.scale.x = 1 * _player.scalingFactor;
                     _player.animations.play('idle');
 
                     new SpeechBox(game, _player, 'Sembra nasconda proprio un bel tesoro! Devo aprirla assolutamente!!', true, () => {

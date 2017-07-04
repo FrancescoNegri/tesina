@@ -85,6 +85,7 @@ FengMengbo.prototype.startCutscene = function (_this) {
         this.cutsceneFlag = true;
         _player.onCutscene = true;
         _player.enable = false;
+        _player.scale.x = 1 * _player.scalingFactor;
 
         let interactionTween = this.game.add.tween(_player);
         interactionTween.to({ x: this.x - 2 * tileSize }, 3 * Math.abs(_fengMengbo.x - _player.x), null, true);

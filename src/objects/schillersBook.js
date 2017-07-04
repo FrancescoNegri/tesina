@@ -34,6 +34,7 @@ SchillersBook.prototype.startCutscene = function (_this) {
         _player.enable = false;
         _player.onCutscene = true;
         _player.body.velocity.x = 0;
+        _player.scale.x = 1 * _player.scalingFactor;
         let wooSound = game.add.audio('woo');
         wooSound.play();
         game.time.events.add(Phaser.Timer.SECOND * 0, () => {
