@@ -47,7 +47,7 @@ SchillersBook.prototype.startCutscene = function (_this) {
                 _player.onCutscene = false;
                 _player.body.velocity.x = 0;
 
-                new SpeechBox(game, _player, 'E questo che diavolo è? Un libro!? \nCosa ci farà un vecchio volume polversoso nel bel mezzo della giungla!?', true, () => {
+                new SpeechBox(game, _player, 'E questo che diavolo è? Un libro!? \nCosa ci farà un vecchio volume polveroso nel bel mezzo della giungla!?', true, () => {
                     new SpeechBox(game, _player, 'Proviamo a vedere di cosa si tratta...', true, () => {
                         _schillersBook.kill();
                         let successSound = game.add.audio('success');
