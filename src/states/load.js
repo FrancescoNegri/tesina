@@ -43,6 +43,9 @@ var loadState = {
 
         //NINE PACKS PLUGIN
         game.load.atlasXML('blueSheet', 'assets/ui/blueSheet.png', 'assets/ui/blueSheet.xml');
+        
+        //  Load the Google WebFont Loader script
+        game.load.script('webfont', 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js');
     },
 
     create: function () {
@@ -50,3 +53,18 @@ var loadState = {
         game.state.start('menu');
     }
 }
+
+//  The Google WebFont Loader will look for this object, so create it before loading the script.
+WebFontConfig = {
+
+    //  'active' means all requested fonts have finished loading
+    //  We set a 1 second delay before calling 'createText'.
+    //  For some reason if we don't the browser cannot render the text the first time it's created.
+    active: function() { console.log('Fonts loaded') },
+
+    //  The Google Fonts we want to load (specify as many as you like in the array)
+    google: {
+      families: ['Aladin']
+    }
+
+};

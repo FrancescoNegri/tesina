@@ -21,9 +21,10 @@ SpeechBox = function (game, speaker, text, isBlocking, callback) {
     this.image.fixedToCamera = true;
 
     this.textOffest = 5;
-    this.text = game.add.text(0 + this.textOffest, 0 + this.textOffest, text, { font: "24px Arial" });
+    this.text = game.add.text(0 + this.textOffest, 0 + this.textOffest, text, { font: "26px Aladin" });
     this.text.wordWrap = true;
     this.text.wordWrapWidth = this.box.width;
+    this.text.lineSpacing = -10;
 
     if (this.text.height > this.box.height) console.log('DIALOGO TROPPO LUNGO! RISOLVERE!!!!! --> non posso gestirlo');
 
