@@ -13,7 +13,7 @@ var slide1State = {
     },
 
     esc: function () {  
-        game.state.start('victory');
+        game.state.start('menu');
     },
 
     startSlide1: function () {
