@@ -35,7 +35,6 @@ var loadState = {
         game.load.image('slide1-img', 'assets/slides/coding.png');
         game.load.image('slide2-img', 'assets/slides/tiled.png');
         game.load.image('slide3-img', 'assets/slides/drawing.png');
-        game.load.image('prova-text', 'assets/prova.png');
 
         //BACKGROUND
         game.load.image('bg_layer1', 'assets/bg/plx-1.png');
