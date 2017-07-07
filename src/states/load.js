@@ -32,7 +32,7 @@ var loadState = {
         game.load.image('victory-text', 'assets/victory-text.png');
 
         //SLIDES
-        game.load.image('slide1-img', 'assets/coding.png');
+        game.load.image('slide1-img', 'assets/slides/coding.png');
         game.load.image('slide2-img', 'assets/slides/tiled.png');
         game.load.image('slide3-img', 'assets/slides/drawing.png');
 
