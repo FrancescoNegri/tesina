@@ -47,14 +47,14 @@ SchillersBook.prototype.startCutscene = function (_this) {
                 _player.onCutscene = false;
                 _player.body.velocity.x = 0;
 
-                new SpeechBox(game, _player, 'E questo che diavolo è? Un libro!? \nCosa ci farà un vecchio volume polveroso nel bel mezzo della giungla!?', true, () => {
+                new SpeechBox(game, _player, 'E questo che diavolo è? Un libro!? \nCosa ci farà un vecchio volume polveroso abbandonato nel bel mezzo della giungla!?', true, () => {
                     new SpeechBox(game, _player, 'Proviamo a vedere di cosa si tratta...', true, () => {
                         _schillersBook.kill();
                         let successSound = game.add.audio('success');
                         successSound.play();
-                        new SpeechBox(game, _player, "Complimenti! Hai raccolto il LIBRO MISTERIOSO!", false, () => {
-                            new SpeechBox(game, _player, "Sulla copertina c'è scritto Callia (o della bellezza), di F. Schiller. \nChissà di cosa parla...", true, () => {
-                                new SpeechBox(game, _player, "All'interno si vede una frase annotata che dice...\n'L'UOMO É VERAMENTE UOMO SOLO QUANDO GIOCA'", true, () => {
+                        new SpeechBox(game, _player, "Complimenti! Hai raccolto LIBRO MISTERIOSO!", false, () => {
+                            new SpeechBox(game, _player, "Sulla copertina c'è scritto 'Sull'educazione estetica dell'uomo', di F. Schiller. \nChe titolo strano...", true, () => {
+                                new SpeechBox(game, _player, "All'interno c'è una frase annotata che dice...\n'L'UOMO É VERAMENTE UOMO SOLO QUANDO GIOCA'", true, () => {
                                     new SpeechBox(game, _player, "Chissà cosa significa....\nMeglio andare comunque, ho pur sempre un tesoro da trovare!", true, () => {
                                         _player.enable = true;
                                         _player.onCutscene = false;

@@ -48,14 +48,14 @@ ASFASign.prototype.startCutscene = function (_this) {
                 _player.body.velocity.x = 0;
                 _player.body.velocity.y = -200;
 
-                new SpeechBox(game, _player, 'Chi mai metterebbe un manifesto del genere in un giungla?! \nMhmhmh...pare si tratti della American Society for Aesthetics.', true, () => {
-                    new SpeechBox(game, _player, 'Deve trattarsi di gente molto strana...è un invito ad un dibattito sul rapporto tra videogiochi e arte.', true, () => {
-                        new SpeechBox(game, _player, "Meglio staccare questo manifesto e metterlo nello zaino. \nNon si sa mai possa tornarmi utile un giorno!", true, () => {
+                new SpeechBox(game, _player, 'Chi mai metterebbe un manifesto del genere in un giungla?! \nMhmhm...pare si tratti della American Society for Aesthetics.', true, () => {
+                    new SpeechBox(game, _player, 'Deve trattarsi di gente molto strana...è un invito ad un dibattito sul rapporto tra videogiochi ed arte.', true, () => {
+                        new SpeechBox(game, _player, "Meglio staccare questo manifesto e metterlo nello zaino. \nPrima o poi potrebbe tornarmi utile!", true, () => {
                             _asfaSign.frame = 1;
                             let successSound = game.add.audio('success');
                             successSound.play();
-                            new SpeechBox(game, _player, "Complimenti! Hai ottenuto il MANIFESTO APPESO!", false, () => {
-                                new SpeechBox(game, _player, "Certo che di cose strane se ne incontrano in questo posto...\nQualcosa mi dice che il peggio deve ancora arrivare...Meglio muoversi!", true, () => {
+                            new SpeechBox(game, _player, "Complimenti! Hai ottenuto MANIFESTO APPESO!", false, () => {
+                                new SpeechBox(game, _player, "Certo che di cose strane se ne incontrano in questo posto...\nQualcosa, però, mi dice che il peggio deve ancora arrivare...Meglio muoversi!", true, () => {
                                     _player.enable = true;
                                     _player.onCutscene = false;
                                 })

@@ -40,7 +40,7 @@ Chest.prototype.startCutscene = function (_this) {
         wooSound.play();
         game.time.events.add(Phaser.Timer.SECOND * 0, () => {
 
-            new SpeechBox(game, _player, 'Finalmente! Ecco il tesoro nascosto in questa giungla!!', true, () => {
+            new SpeechBox(game, _player, 'Finalmente! Ecco quello che stavo cercando in questa giungla!!', true, () => {
                 let approachChestTween = this.game.add.tween(_player);
                 approachChestTween.to({ x: _chest.x - .5 * tileSize }, 1000, null, true)
                 approachChestTween.onUpdateCallback(function () {
@@ -52,15 +52,14 @@ Chest.prototype.startCutscene = function (_this) {
                     _player.scale.x = 1 * _player.scalingFactor;
                     _player.animations.play('idle');
 
-                    new SpeechBox(game, _player, 'Sembra nasconda proprio un bel tesoro! Devo aprirla assolutamente!!', true, () => {
+                    new SpeechBox(game, _player, 'Sembra nasconda proprio un bel tesoro! Apriamo questa cassa!!', true, () => {
                         _chest.frame = 1;
                         let openSound = game.add.audio('chest-open');
                         openSound.play();
                         game.time.events.add(Phaser.Timer.SECOND * 1, () => {
                             game.camera.fade(null, 1500);
                             game.camera.onFadeComplete.add(() => {
-                                goFullScreen();
-                                game.state.start('victory');
+                                game.state.start('huizinga');
                             }, this);
                         })
                     });

@@ -139,11 +139,11 @@ FengMengbo.prototype.startCutscene = function (_this) {
             }
             else {
                 new SpeechBox(game, _fengMengbo, 'Altolà! Chi sei!? Non si vedono mai degli stranieri in giro da queste parti...', true, () => {
-                    new SpeechBox(game, _player, 'Sono un esploratore, come può ben vedere dal mio abbigliamento! E lei chi sarebbe invece?', true, () => {
+                    new SpeechBox(game, _player, 'Sono un esploratore, come puoi ben vedere dal mio abbigliamento! E tu chi saresti invece?', true, () => {
                         new SpeechBox(game, _fengMengbo, "Il mio nome è Feng Mengbo, non ti dice nulla? Sono un famoso artista cinese e vengo in questi posti solitari per cercare l'ispirazione!", true, () => {
                             new SpeechBox(game, _fengMengbo, "Devi sapere che una mia opera d'arte è perfino in esposizione a New York, al MOMA!\nTu, che sei un esploratore e viaggi tanto, ci sei mai stato?", true, () => {
                                 new SpeechBox(game, _player, "No, mi dispiace, la città non fa per me...\n", true, () => {
-                                    new SpeechBox(game, _player, "Preferisco decisamente luoghi esotici e pieni di pericoli!\nMi è giunta voce che in questa giungla sia nascosto un tesoro, potrebbe indicarmi la strada?", true, () => {
+                                    new SpeechBox(game, _player, "Preferisco decisamente luoghi esotici e pieni di pericoli!\nMi è giunta voce che in questa giungla sia nascosto un tesoro, potresti indicarmi la strada?", true, () => {
                                         new SpeechBox(game, _fengMengbo, "Certo, devi proseguire sempre dritto, attento a non perderti! Ora devo andare, ho avuto un'idea geniale per il mio nuovo capolavoro! Addio esploratore!!", true, () => {
                                             _fengMengbo.body.velocity.y = -150;
                                             let exitTween = this.game.add.tween(_fengMengbo);

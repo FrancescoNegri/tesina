@@ -48,13 +48,13 @@ QuintiliansStatue.prototype.startCutscene = function (_this) {
                 _player.body.velocity.x = 0;
 
                 new SpeechBox(game, _player, 'Wooooow!! \nQuesta stauta sembra davvero molta antica! \nSarei proprio curioso di scoprire chi raffigura...', true, () => {
-                    new SpeechBox(game, _player, "Guarda un po'! Mi sembra proprio che lì in basso ci sia una targhetta dorata. \nProverò a darle un'occhiata più da vicino...", true, () => {
+                    new SpeechBox(game, _player, "Guarda un po'! Mi sembra che lì in basso ci sia una targhetta dorata. \nProverò a darle un'occhiata più da vicino...", true, () => {
                         let successSound = game.add.audio('success');
                         successSound.play();
                         _quintiliansStatue.frame = 1;
-                        new SpeechBox(game, _player, "Complimenti! Hai raccolto la TARGHETTA DORATA!", false, () => {
-                            new SpeechBox(game, _player, "C'è proprio una scritta, ma faccio fatica a leggerla...\n'MORES QUOQUE SE INTER LUDENDUM SIMPLICIUS DETEGUNT' - M. F. Quintilianus", true, () => {
-                                new SpeechBox(game, _player, "Mhmhmhm...avrei proprio fatto meglio a studiare più latino al Liceo...\nPerò il nome Quintiliano mi dice qualcosa...", true, () => {
+                        new SpeechBox(game, _player, "Complimenti! Hai raccolto TARGHETTA DORATA!", false, () => {
+                            new SpeechBox(game, _player, "Mi pare ci sia proprio una scritta sopra, ma faccio fatica a leggerla...\n'MORES QUOQUE SE INTER LUDENDUM SIMPLICIUS DETEGUNT' - M. F. Quintilianus", true, () => {
+                                new SpeechBox(game, _player, "Mhmhm...avrei proprio fatto meglio a studiare più latino al Liceo...\nPerò il nome Quintiliano mi dice qualcosa...", true, () => {
                                     new SpeechBox(game, _player, "Comunque non ho altro tempo da perdere! \nUn tesoro mi aspetta!!", true, () => {
                                         _player.enable = true;
                                         _player.onCutscene = false;
