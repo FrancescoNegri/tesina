@@ -8,4 +8,8 @@ game.state.add('level2', level2State);
 game.state.add('huizinga', huizingaState);
 game.state.add('victory', victoryState);
 
+game.state.add('slide1', slide1State);
+game.state.add('slide2', slide2State);
+game.state.add('slide3', slide3State);
+
 game.state.start('boot');

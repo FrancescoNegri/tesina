@@ -31,6 +31,11 @@ var loadState = {
         game.load.image('huizinga-text', 'assets/huizinga-text.png');
         game.load.image('victory-text', 'assets/victory-text.png');
 
+        //SLIDES
+        game.load.image('slide1-img', 'assets/slides/coding.png');
+        game.load.image('slide2-img', 'assets/slides/tiled.png');
+        game.load.image('slide3-img', 'assets/slides/drawing.png');
+
         //BACKGROUND
         game.load.image('bg_layer1', 'assets/bg/plx-1.png');
         game.load.image('bg_layer2', 'assets/bg/plx-2.png');
